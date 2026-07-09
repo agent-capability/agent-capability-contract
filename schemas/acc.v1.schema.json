@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentcapability.org/schemas/acc.v1.schema.json",
+  "title": "Agent Capability Contract v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "enabled", "scope"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "when": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["param", "op"],
+            "properties": {
+              "param": {
+                "type": "string",
+                "minLength": 1
+              },
+              "op": {
+                "type": "string",
+                "enum": [">", ">=", "<", "<=", "==", "!=", "in", "contains", "exists"]
+              },
+              "value": {},
+              "label": {
+                "type": "string",
+                "maxLength": 300
+              }
+            }
+          }
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "sensitive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "readonly": {
+          "type": "boolean"
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        },
+        "rate_limit": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["count", "window"],
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "window": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]*(s|m|h|d)$"
+            }
+          }
+        }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "when_to_use": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "returns": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "context": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      }
+    }
+  }
+}

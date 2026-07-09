@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  title: ACC Subject Example
+  version: 1.0.0
+paths:
+  /staff/search:
+    get:
+      operationId: staff_search
+      summary: Search staff by name or department.
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          description: Staff name, phone suffix, or department keyword.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Staff search result.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: staff.search
+        risk:
+          level: low
+        subject:
+          required: true
+        execution:
+          readonly: true
+          idempotent: true
+        guidance:
+          when_to_use: Use when the acting subject is logged in and asks to find staff records.
+          returns: Returns matched staff records filtered by the business system's own permission rules.
+

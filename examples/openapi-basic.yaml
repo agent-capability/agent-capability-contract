@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: ACC Basic Example
+  version: 1.0.0
+paths:
+  /orders/{id}:
+    get:
+      operationId: order_get
+      summary: Query one order by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Order ID, for example SO202607001.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Order detail.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: order.read
+        risk:
+          level: low
+        subject:
+          required: true
+        execution:
+          readonly: true
+          idempotent: true
+        guidance:
+          when_to_use: Use when the user asks for order status, amount, customer, or fulfillment state.
+          returns: Returns order status, amount, customer name, and fulfillment state.
+          examples:
+            - id: SO202607001
+

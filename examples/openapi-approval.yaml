@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: ACC Approval Example
+  version: 1.0.0
+paths:
+  /refunds/request:
+    post:
+      operationId: refund_request_create
+      summary: Create a refund request for an order.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - order_id
+                - amount
+                - reason
+              properties:
+                order_id:
+                  type: string
+                  description: Order ID.
+                amount:
+                  type: number
+                  description: Refund amount.
+                reason:
+                  type: string
+                  description: Refund reason.
+      responses:
+        "200":
+          description: Refund request creation result.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: refund.request.create
+        risk:
+          level: medium
+        subject:
+          required: true
+        approval:
+          when:
+            - param: amount
+              op: ">"
+              value: 1000
+              label: Refund amount exceeds 1000.
+        audit:
+          sensitive: true
+        execution:
+          readonly: false
+          idempotent: false
+          timeout_ms: 10000
+          rate_limit:
+            count: 30
+            window: 1m
+        guidance:
+          when_to_use: Use when the user asks to start a refund workflow. This creates a request, not an immediate refund.
+          returns: Returns pending_approval, created, rejected, or failed.
+

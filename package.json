@@ -1,0 +1,26 @@
+{
+  "name": "agent-capability-contract",
+  "version": "0.1.0",
+  "private": false,
+  "description": "ACC is the capability declaration contract for A2B, Agent-to-Business.",
+  "license": "Apache-2.0",
+  "homepage": "https://agentcapability.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agent-capability/agent-capability-contract.git"
+  },
+  "keywords": [
+    "acc",
+    "agent-capability-contract",
+    "a2b",
+    "agent-to-business",
+    "agent-tools",
+    "openapi",
+    "tool-governance",
+    "agent-runtime",
+    "ai-agents"
+  ],
+  "scripts": {
+    "check": "node -e \"const fs=require('fs'); JSON.parse(fs.readFileSync('schemas/acc.v1.schema.json','utf8')); console.log('acc schema ok')\""
+  }
+}
