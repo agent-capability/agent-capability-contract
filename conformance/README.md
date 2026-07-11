@@ -1,6 +1,10 @@
 # ACC Conformance Checklist
 
-This checklist is for runtimes, gateways, SDKs, and developer tools that want to claim ACC v1 compatibility.
+This checklist records ACC v1 runtime responsibilities. Before making a compatibility claim, select the applicable Parser, Generator, Runtime, or Policy Component profile in [PROFILES.md](PROFILES.md).
+
+Use [SELF_ASSESSMENT.md](SELF_ASSESSMENT.md) to publish evidence and register an implementation. ACC currently uses self-assessment, not official certification.
+
+Parser implementations normally complete the Parser section. Runtime implementations complete every applicable section. Generator and Policy Component requirements are defined in their profiles because they do not own the full runtime lifecycle.
 
 ## Parser
 
@@ -25,6 +29,9 @@ This checklist is for runtimes, gateways, SDKs, and developer tools that want to
 - [ ] Detects `risk.level: high` before invocation.
 - [ ] Detects `approval.required` before invocation.
 - [ ] Evaluates `approval.when` against invocation arguments.
+- [ ] Requires every `approval.when.param` to resolve to a declared, typed OpenAPI parameter.
+- [ ] Uses strict JSON type-aware comparison for approval conditions; does not coerce strings into numbers or booleans.
+- [ ] Rejects a condition parameter whose invocation value is incompatible with its declared schema before calling the business operation.
 - [ ] Applies `execution.rate_limit` or maps it to runtime limits.
 - [ ] Applies `execution.timeout_ms` or maps it to runtime timeout policy.
 - [ ] Treats `audit.sensitive` as a redaction or summarization hint.

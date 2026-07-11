@@ -13,6 +13,8 @@ ACC defines how a business system describes which operations an agent may see, w
 
 ACC is not a runtime, a chatbot framework, or a workflow engine. It is a portable contract that can be implemented by different control planes, gateways, SDKs, developer tools, and agent runtimes.
 
+ACC is maintained as an independent, implementation-neutral standard. No product implementation defines ACC semantics or receives privileged compatibility status.
+
 ACC is the capability contract for **A2B (Agent-to-Business)**: agents safely doing business work through existing systems.
 
 ## Why ACC Exists
@@ -53,6 +55,15 @@ x-agent-capability:
 
 See [SPEC.md](SPEC.md) for the normative field model.
 
+ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.0`; product or runtime versions are separate.
+
+## Implement ACC
+
+- Read the non-normative [Implementer's Guide](IMPLEMENTER_GUIDE.md).
+- Choose a claim from [Conformance Profiles](conformance/PROFILES.md).
+- Publish evidence using [Implementation Registration and Self-Assessment](conformance/SELF_ASSESSMENT.md).
+- Submit a pull request to the neutral [implementation registry](IMPLEMENTATIONS.md).
+
 ## Repository Layout
 
 ```text
@@ -62,7 +73,11 @@ bindings/openapi.md           OpenAPI extension binding
 schemas/acc.v1.schema.json    Machine-readable JSON Schema
 examples/                     OpenAPI examples
 conformance/README.md         Implementation conformance checklist
+conformance/PROFILES.md       Parser, generator, runtime, and policy profiles
+conformance/SELF_ASSESSMENT.md Open registration and evidence template
+IMPLEMENTER_GUIDE.md          Non-normative implementation architecture guidance
 IMPLEMENTATIONS.md            Known implementations and claim language
+RELEASE_NOTES_v1.0.0.md       Stable ACC v1 release summary
 GOVERNANCE.md                 Stewardship, versioning, and extension rules
 CONTRIBUTING.md               Contribution rules for contract changes
 CHANGELOG.md                  Public changes
@@ -74,7 +89,7 @@ LICENSE                       Apache-2.0 license
 
 ACC is implementation-neutral. It can be implemented by control planes, API gateways, SDK generators, developer tools, agent runtimes, MCP gateways, and policy engines.
 
-Known implementations are listed in [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md). Projects implementing ACC are welcome to submit a pull request to be listed there.
+Known implementations are listed alphabetically in [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md). Projects implementing ACC are welcome to publish a self-assessment and submit a pull request. Listing is not certification or endorsement.
 
 ## License
 

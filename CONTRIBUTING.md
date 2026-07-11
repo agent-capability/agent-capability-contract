@@ -37,6 +37,19 @@ For schema or normative behavior:
 5. Add an example.
 6. Add a `CHANGELOG.md` entry.
 
+## Neutrality Review
+
+Every contract, guidance, example, conformance, and registry change should answer:
+
+1. Does this text work for an implementation with a different language, owner, architecture, storage model, and deployment topology?
+2. Is every product-specific concept clearly labeled as an example rather than ACC behavior?
+3. Are normative requirements separated from recommendations and optional platform features?
+4. Can the behavior be tested without depending on one implementation's private state or UI?
+5. Does the change preserve the boundary between ACC reach and business-system authority?
+6. Would the same registry and contribution criteria apply to an unrelated implementation?
+
+A proposal that fails this review belongs in implementation documentation, not ACC core.
+
 ## Compatibility Rule
 
 ACC v1 should remain backward-compatible.

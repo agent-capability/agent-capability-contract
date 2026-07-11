@@ -13,6 +13,22 @@ The long-term goal is to keep ACC implementation-neutral:
 - Any compatible runtime may implement ACC independently.
 - The ACC specification should not depend on any implementation's internal database tables, UI concepts, or deployment model.
 
+## Maintainer Neutrality Invariants
+
+ACC is an independent standard. It is not a subproject, configuration format, sales surface, or compatibility layer owned by any product implementation.
+
+Maintainers MUST preserve the following boundaries:
+
+- normative behavior is defined by ACC specification artifacts, not by any implementation's current code;
+- no product receives privileged semantics, registry criteria, roadmap influence, or compatibility status because of its owner or relationship with maintainers;
+- implementation names appear only in clearly labeled examples, evidence, or registry entries;
+- an implementation-specific design may motivate discussion, but it becomes ACC behavior only when it is portable, testable, and accepted through the contract change process;
+- examples and implementer guidance must distinguish normative requirements from recommended, optional, and example architecture;
+- ACC governance, versioning, and licensing must remain usable by independent open-source and commercial implementations;
+- registry inclusion does not imply certification, endorsement, partnership, security review, or production-readiness approval.
+
+Historical attribution does not grant control over implementations and does not make the contract dependent on the project that first proposed it.
+
 ## Versioning
 
 ACC uses semantic versioning for the specification.
@@ -29,6 +45,14 @@ x-agent-capability:
 ```
 
 The `version` field is an ACC schema version, not an implementation or product version.
+
+Repository tags identify exact specification revisions:
+
+- `v1.0.x`: wording, guidance, examples, schema corrections, and non-breaking clarifications for ACC v1;
+- `v1.x.0`: new optional, portable, non-breaking ACC v1 behavior;
+- `v2.0.0`: an incompatible contract family that also requires declaration `version: 2`.
+
+Product versions and implementation release schedules MUST NOT be reused as ACC specification versions.
 
 ## Extension Rules
 
@@ -57,9 +81,26 @@ ACC implementations may include runtime features that are not part of ACC.
 
 When an implementation feature becomes generally useful as a portable declaration, it can be proposed for ACC only after the contract boundary is clear.
 
+Implementations register through public self-assessment evidence under the same criteria. The registration process is defined in [conformance/SELF_ASSESSMENT.md](conformance/SELF_ASSESSMENT.md).
+
+## Implementation Evidence
+
+Observed implementation failures can improve guidance, but evidence must be labeled accurately:
+
+- specification-derived invariants may be documented immediately;
+- experience from one implementation must be labeled as an example, not an ecosystem-wide pattern;
+- normative changes require portable semantics and conformance evidence;
+- an implementation's operational modules, workflow, storage, transport, and UI remain outside ACC unless separately standardized.
+
+## Release Planning
+
+Public milestones should communicate planned contract and documentation work. Release timing must not be coupled to a product release schedule.
+
+Documentation-only guidance and non-normative examples may ship in patch releases. New optional normative behavior requires a minor release; incompatible semantics require a major release.
+
 ## Attribution
 
-Projects implementing ACC should cite:
+Projects implementing ACC may cite the historical source as:
 
 ```text
 ACC (Agent Capability Contract), first published by the BailingHub project.
@@ -68,7 +109,7 @@ ACC (Agent Capability Contract), first published by the BailingHub project.
 Implementations may say:
 
 ```text
-Implements ACC v1.
+Implements the ACC v1 Runtime Profile.
 ```
 
 They may not imply official certification unless a certification program exists.

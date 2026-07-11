@@ -11,6 +11,8 @@
 
 ACC 不是运行时、不是聊天机器人框架、也不是工作流引擎。它只定义一件事：业务能力在进入 Agent 世界前，应该如何声明可见范围、风险、主体、审批意图、审计和扩展信息。
 
+ACC 以独立、实现中立的标准方式维护。任何产品实现都不能定义 ACC 语义，也不会因为与维护者的关系获得优先兼容地位。
+
 ACC 是 **A2B（Agent-to-Business）** 场景下的能力声明契约。A2B 指的是：让 Agent 安全、可治理地接入已有业务系统，并代替真实业务主体查数据、办业务、走流程。
 
 ## 为什么需要 ACC
@@ -51,6 +53,15 @@ x-agent-capability:
 
 规范正文见 [SPEC.md](SPEC.md)。
 
+ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.0` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
+
+## 实现 ACC
+
+- 阅读非规范性的 [实现者指南](IMPLEMENTER_GUIDE.md)；
+- 从 [合规 Profile](conformance/PROFILES.md) 中选择准确的实现声明；
+- 使用 [实现登记与自评流程](conformance/SELF_ASSESSMENT.md) 发布证据；
+- 通过 pull request 登记到中立的 [实现列表](IMPLEMENTATIONS.md)。
+
 ## 目录结构
 
 ```text
@@ -60,7 +71,11 @@ bindings/openapi.md           OpenAPI 扩展绑定说明
 schemas/acc.v1.schema.json    机器可读 JSON Schema
 examples/                     OpenAPI 示例
 conformance/README.md         实现者兼容性检查清单
+conformance/PROFILES.md       Parser、Generator、Runtime 与策略组件 Profile
+conformance/SELF_ASSESSMENT.md 开放登记与证据模板
+IMPLEMENTER_GUIDE.md          非规范性的实现架构指引
 IMPLEMENTATIONS.md            已知实现与声明口径
+RELEASE_NOTES_v1.0.0.md       ACC v1 首个稳定规范发布摘要
 GOVERNANCE.md                 维护、版本和扩展规则
 CONTRIBUTING.md               契约修改贡献规则
 CHANGELOG.md                  公开变更记录
@@ -72,7 +87,7 @@ LICENSE                       Apache-2.0 协议
 
 ACC 保持实现无关。控制面、API 网关、SDK 生成器、开发者工具、Agent 运行时、MCP 网关、策略引擎都可以实现 ACC。
 
-已知实现见 [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md)。任何实现 ACC 的项目都可以通过 pull request 提交到该列表。
+已知实现按项目名称排序登记在 [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md)。任何实现 ACC 的项目都可以发布自评证据并通过 pull request 申请登记；被列入不代表认证或背书。
 
 ## 协议
 

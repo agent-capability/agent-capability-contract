@@ -1,7 +1,8 @@
 # Agent Capability Contract v1
 
-Status: Draft  
-Short name: ACC v1  
+Status: Stable
+Short name: ACC v1
+Specification release: 1.0.0
 OpenAPI extension: `x-agent-capability`
 
 ## 1. Scope
@@ -203,6 +204,15 @@ Fields:
 | `value` | any | conditional | Comparison value; not required for `exists`. |
 | `label` | string | no | Human-readable explanation. |
 
+Approval condition semantics:
+
+- `param` MUST resolve to a parameter declared in the operation's standard OpenAPI `parameters` or `requestBody` JSON Schema.
+- Runtimes MUST evaluate conditions against JSON values. They MUST NOT coerce strings into numbers or booleans for comparison.
+- `>` / `>=` / `<` / `<=` require a JSON `number` or `integer` parameter and a finite JSON number as `value`.
+- `==`, `!=`, and `in` use strict JSON type-aware equality. For example, `true` is not equal to `"true"`, and `0` is not equal to `"0"`.
+- `contains` applies only to string or array parameters. String containment requires a string `value`; array containment uses strict JSON equality for elements.
+- If an invocation supplies a value whose JSON type is incompatible with the condition parameter schema, the runtime MUST reject the invocation before it reaches the business operation. It MUST NOT silently treat the condition as unmatched.
+
 ACC declares approval intent. It does not define who approves, where approval occurs, or how the business workflow is completed.
 
 ### 4.7 `audit`
@@ -292,6 +302,8 @@ An ACC-compatible runtime SHOULD:
 - apply risk defaults for omitted risk values;
 - hide `subject.required` capabilities when no trusted subject exists;
 - detect `approval.required` and `approval.when` before invocation;
+- validate `approval.when` targets and values against the declared parameter schema;
+- evaluate approval conditions without implicit JSON type coercion and reject incompatible invocation values before the business operation;
 - preserve audit and trace information;
 - ignore unknown ACC fields safely;
 - preserve implementation-specific extension fields without making them security rules.
@@ -313,3 +325,9 @@ ACC follows semantic versioning for the specification:
 
 ACC v1 runtimes MUST ignore unknown fields and SHOULD produce diagnostics for unsupported versions.
 
+The declaration field and the specification release serve different purposes:
+
+- `x-agent-capability.version: 1` identifies the major contract compatibility family;
+- repository releases use semantic versions such as `v1.0.0` for an exact published revision of ACC v1;
+- patch and minor releases within `v1.x.x` keep the declaration field at `1`;
+- a breaking contract family would require both an ACC `v2.0.0` specification release and `x-agent-capability.version: 2`.
