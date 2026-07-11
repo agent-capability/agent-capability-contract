@@ -85,6 +85,7 @@ conformance/README.md         Implementation conformance checklist
 conformance/PROFILES.md       Parser, generator, runtime, and policy profiles
 conformance/SELF_ASSESSMENT.md Open registration and evidence template
 conformance/v1/                Machine-readable ACC v1 conformance vectors
+proposals/                     Public normative proposal process and template
 IMPLEMENTER_GUIDE.md          Non-normative implementation architecture guidance
 DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns belong
 DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries

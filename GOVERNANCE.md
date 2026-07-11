@@ -82,6 +82,21 @@ Unknown-field tolerance guarantees that a newer declaration remains parseable. I
 
 Otherwise the change requires a new major contract family or an explicit capability-negotiation mechanism.
 
+## Proposal Decisions
+
+The core-field tests are necessary, not sufficient. Passing them makes a proposal eligible for review; it does not automatically place the proposal in ACC core or on a release roadmap.
+
+Normative proposals are reviewed for:
+
+- demonstrated need across independent implementation contexts;
+- minimality and correct layer ownership;
+- complete normative semantics, including defaults, precedence, and failure behavior;
+- fail-safe compatibility or an explicit compatibility boundary;
+- implementation evidence and machine-readable conformance vectors;
+- ecosystem complexity and long-term maintenance cost.
+
+Proposal states and submission requirements are defined in [proposals/README.md](proposals/README.md). Accepted proposals still ship only through the normal versioning and release process.
+
 ## Implementations
 
 ACC implementations may include runtime features that are not part of ACC.

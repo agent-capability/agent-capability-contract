@@ -83,6 +83,7 @@ conformance/README.md         实现者兼容性检查清单
 conformance/PROFILES.md       Parser、Generator、Runtime 与策略组件 Profile
 conformance/SELF_ASSESSMENT.md 开放登记与证据模板
 conformance/v1/                机器可读的 ACC v1 Conformance 测试向量
+proposals/                     公开的规范提案流程与模板
 IMPLEMENTER_GUIDE.md          非规范性的实现架构指引
 DESIGN_RATIONALE.md           ACC 保持小核心的原因与相邻职责边界
 DESIGN_RATIONALE.zh-CN.md     设计依据与边界中文版

@@ -2,6 +2,8 @@
 
 ACC is a contract. Changes should prioritize compatibility, clarity, and implementation neutrality.
 
+Normative field or behavior proposals should follow the public process in [proposals/README.md](proposals/README.md) and begin from [proposals/TEMPLATE.md](proposals/TEMPLATE.md).
+
 ## What Belongs In ACC
 
 Good candidates:
@@ -30,13 +32,16 @@ For wording and examples:
 
 For schema or normative behavior:
 
-1. Explain the problem and why existing fields cannot solve it.
-2. Update `SPEC.md`.
-3. Update `schemas/acc.v1.schema.json` if the field is machine-readable.
-4. Add conformance notes.
-5. Add an example.
-6. Add a `CHANGELOG.md` entry.
-7. Add machine-readable conformance vectors for portable parser or runtime behavior.
+1. Submit a proposal that explains the portable problem and why existing fields cannot solve it.
+2. Complete layer-boundary, compatibility, security, and implementation-evidence review.
+3. After acceptance, update `SPEC.md`.
+4. Update `schemas/acc.v1.schema.json` if the field is machine-readable.
+5. Add conformance notes.
+6. Add an example.
+7. Add a `CHANGELOG.md` entry.
+8. Add machine-readable conformance vectors for portable parser or runtime behavior.
+
+Submitting a proposal does not place it on the roadmap. Proposal authors may provide a self-assessment, but status is recorded through public governance review with rationale.
 
 ## Neutrality Review
 

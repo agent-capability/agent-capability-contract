@@ -33,6 +33,17 @@ A field belongs in ACC core only when all of the following are true:
 5. It does not require the runtime to become the final business authorization authority.
 6. An older compatible runtime can ignore the field without silently reducing security, or the change uses a new major compatibility family.
 
+These conditions are necessary, not sufficient. Passing them makes a proposal eligible for governance review; it does not create an obligation to add the field to ACC core.
+
+Review also considers:
+
+- demonstrated need across independent implementation contexts;
+- whether the proposal is the smallest stable semantic addition;
+- whether a binding, implementation extension, or adjacent specification is a better owner;
+- complete defaults, precedence, failure, and security semantics;
+- backward-compatibility and ecosystem implementation cost;
+- implementation evidence and machine-readable conformance vectors.
+
 More fields are not automatically better. A field that cannot pass this test creates apparent portability while moving hidden assumptions into every implementation.
 
 ## 3. Known Concerns That Are Intentionally Outside ACC Core

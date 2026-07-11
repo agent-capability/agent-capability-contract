@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a public normative proposal lifecycle and template.
+- Clarified that core-field admission checks are necessary but not sufficient.
+
 ## 1.0.1 - 2026-07-12
 
 - Clarified that `approval.when` uses ANY semantics when unconditional approval is not required.
