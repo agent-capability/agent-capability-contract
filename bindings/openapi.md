@@ -122,6 +122,8 @@ x-agent-capability:
     idempotent: false
 ```
 
+`approval.when` uses ANY semantics: when `approval.required` is false or omitted, any matching item creates an approval intent. `approval.required: true` remains unconditional and cannot be reduced by `approval.when`.
+
 ## Non-Goals
 
 The OpenAPI binding does not define:
@@ -134,3 +136,4 @@ The OpenAPI binding does not define:
 
 Those are runtime concerns. ACC defines the declaration, not the whole control plane.
 
+The reasoning behind these boundaries is documented in [Design Rationale And Boundaries](../DESIGN_RATIONALE.md).

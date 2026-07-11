@@ -73,7 +73,8 @@ Minimum behavior:
 - preserves the boundary between capability reach and final business authorization;
 - prevents model-controlled input from overriding governance metadata;
 - records capability, governance decision, result/failure summary, and requested redaction;
-- emits diagnostics for skipped or unsupported declarations.
+- emits diagnostics for skipped or unsupported declarations;
+- evaluates `approval.when` with ANY semantics and keeps unconditional `approval.required` dominant.
 
 The Runtime Profile does not require an LLM, UI, database, queue, signature algorithm, cost system, or approval product.
 
@@ -107,6 +108,8 @@ Self-assessments may provide:
 | Interoperability | Evidence that declarations produced or consumed by another implementation behave consistently. |
 
 Evidence depth may vary, but unsupported behavior must not be hidden.
+
+Machine-readable reference vectors under [v1](v1/README.md) may be used as reproducible evidence. A result should identify the corpus specification release, applicable vectors, implementation version or commit, skipped vectors, and known limitations.
 
 ## 7. Version Maintenance
 

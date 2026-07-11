@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 1.0.1 - 2026-07-12
+
+- Clarified that `approval.when` uses ANY semantics when unconditional approval is not required.
+- Clarified that `approval.required: true` remains unconditional and cannot be reduced by conditional rules.
+- Added machine-readable ACC v1 parser and runtime conformance vectors plus a reference oracle.
+- Added a design-rationale document covering known A2B concerns that intentionally belong outside ACC core.
+- Added a fail-safe compatibility rule for security-relevant optional fields.
+- Separated stable specification status from early ecosystem maturity.
+- No existing ACC v1 declaration requires migration.
+
 ## 1.0.0 - 2026-07-11
 
 - Published the stable ACC v1 specification release while keeping declaration compatibility at `x-agent-capability.version: 1`.

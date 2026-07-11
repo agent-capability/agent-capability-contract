@@ -1,8 +1,10 @@
 # Agent Capability Contract v1
 
 Status: Stable
+Ecosystem maturity: Early adoption
+Conformance: Self-assessment with machine-readable reference vectors
 Short name: ACC v1
-Specification release: 1.0.0
+Specification release: 1.0.1
 OpenAPI extension: `x-agent-capability`
 
 ## 1. Scope
@@ -206,6 +208,9 @@ Fields:
 
 Approval condition semantics:
 
+- `approval.required: true` means every invocation creates an approval intent. Conditional rules MUST NOT reduce an unconditional approval requirement.
+- When `approval.required` is false or omitted, `approval.when` uses **ANY** semantics: one matching item is sufficient to create an approval intent.
+- An absent or empty `approval.when` array creates no conditional approval intent.
 - `param` MUST resolve to a parameter declared in the operation's standard OpenAPI `parameters` or `requestBody` JSON Schema.
 - Runtimes MUST evaluate conditions against JSON values. They MUST NOT coerce strings into numbers or booleans for comparison.
 - `>` / `>=` / `<` / `<=` require a JSON `number` or `integer` parameter and a finite JSON number as `value`.
@@ -325,9 +330,11 @@ ACC follows semantic versioning for the specification:
 
 ACC v1 runtimes MUST ignore unknown fields and SHOULD produce diagnostics for unsupported versions.
 
+Ignoring an unknown field provides syntax-level forward compatibility, not automatic security compatibility. A new field that affects exposure, approval, authority boundaries, or redaction may remain in the ACC v1 family only when an older runtime ignoring it is fail-safe or when the declaration includes a conservative ACC v1 fallback. Otherwise the behavior requires a new major contract family or explicit capability negotiation.
+
 The declaration field and the specification release serve different purposes:
 
 - `x-agent-capability.version: 1` identifies the major contract compatibility family;
-- repository releases use semantic versions such as `v1.0.0` for an exact published revision of ACC v1;
+- repository releases use semantic versions such as `v1.0.1` for an exact published revision of ACC v1;
 - patch and minor releases within `v1.x.x` keep the declaration field at `1`;
 - a breaking contract family would require both an ACC `v2.0.0` specification release and `x-agent-capability.version: 2`.

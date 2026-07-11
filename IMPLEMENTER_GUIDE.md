@@ -88,6 +88,8 @@ Before a capability becomes visible to an agent or caller:
 5. Preserve the standard parameter schema used for argument generation and validation.
 6. Emit diagnostics for skipped or unsupported declarations.
 
+For approval evaluation, `approval.required: true` is unconditional. Otherwise, `approval.when` uses ANY semantics: the first or any matching condition is sufficient to create an approval intent. Implementations may evaluate every condition for diagnostics, but a non-matching condition cannot cancel another matching condition.
+
 ACC does not standardize a route object. A runtime may use routes, products, tenants, scenarios, or static policies as its exposure context, provided its matching behavior is documented.
 
 ## 6. Invocation Lifecycle
@@ -109,6 +111,8 @@ select capability
 ```
 
 The model or caller may propose a capability and arguments. It must not determine its own scope, risk, subject trust, approval decision, or audit policy.
+
+Machine-readable reference inputs and abstract expected outcomes are published under [conformance/v1](conformance/v1/README.md). They test portable decisions rather than a particular queue, database, hash algorithm, or user interface.
 
 ## 7. Approval Intent Reference Flow
 

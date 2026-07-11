@@ -1,6 +1,6 @@
 {
   "name": "agent-capability-contract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "ACC is the capability declaration contract for A2B, Agent-to-Business.",
   "license": "Apache-2.0",
@@ -21,6 +21,10 @@
     "ai-agents"
   ],
   "scripts": {
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs && node scripts/check-conformance.mjs",
+    "conformance:check": "node scripts/check-conformance.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1"
   }
 }

@@ -28,7 +28,9 @@ Parser implementations normally complete the Parser section. Runtime implementat
 - [ ] Applies safe risk defaults.
 - [ ] Detects `risk.level: high` before invocation.
 - [ ] Detects `approval.required` before invocation.
-- [ ] Evaluates `approval.when` against invocation arguments.
+- [ ] Treats `approval.required: true` as unconditional approval intent.
+- [ ] Evaluates `approval.when` with ANY semantics when unconditional approval is not required.
+- [ ] Treats an absent or empty `approval.when` as no conditional approval intent.
 - [ ] Requires every `approval.when.param` to resolve to a declared, typed OpenAPI parameter.
 - [ ] Uses strict JSON type-aware comparison for approval conditions; does not coerce strings into numbers or booleans.
 - [ ] Rejects a condition parameter whose invocation value is incompatible with its declared schema before calling the business operation.
@@ -49,6 +51,8 @@ Parser implementations normally complete the Parser section. Runtime implementat
 - [ ] Records risk and approval decisions.
 - [ ] Records invocation result or failure summary.
 - [ ] Redacts sensitive values when requested.
+
+Machine-readable ACC v1 inputs and abstract expected outcomes are available in [v1/README.md](v1/README.md). They complement this checklist; they do not create an official certification program.
 
 ## Claim Language
 

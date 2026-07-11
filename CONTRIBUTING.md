@@ -36,6 +36,7 @@ For schema or normative behavior:
 4. Add conformance notes.
 5. Add an example.
 6. Add a `CHANGELOG.md` entry.
+7. Add machine-readable conformance vectors for portable parser or runtime behavior.
 
 ## Neutrality Review
 
@@ -55,6 +56,8 @@ A proposal that fails this review belongs in implementation documentation, not A
 ACC v1 should remain backward-compatible.
 
 Do not change the meaning of an existing field in a patch or minor release. Add optional fields instead.
+
+An optional field is not safely backward-compatible merely because an older parser ignores it. If the field affects exposure, approval, authority boundaries, or redaction, the proposal must show that ignoring it is fail-safe or provide a conservative fallback understood by older ACC v1 runtimes. Otherwise propose a new major compatibility family.
 
 ## Language
 

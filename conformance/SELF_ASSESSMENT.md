@@ -36,6 +36,8 @@ Maintainers review whether the submission is complete, accurately scoped, public
 - Unsupported optional fields:
 - OpenAPI versions:
 - Runtime or integration assumptions:
+- Conformance corpus release:
+- Applicable vectors passed / skipped:
 
 ## Conformance Evidence
 
@@ -46,6 +48,7 @@ Maintainers review whether the submission is complete, accurately scoped, public
 | Governance | Pass / Partial / N/A | | |
 | Authority Boundary | Pass / Partial / N/A | | |
 | Traceability | Pass / Partial / N/A | | |
+| Machine-readable vectors | Pass / Partial / N/A | | |
 
 ## Known Limitations
 

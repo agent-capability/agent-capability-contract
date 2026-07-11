@@ -17,6 +17,14 @@ ACC is maintained as an independent, implementation-neutral standard. No product
 
 ACC is the capability contract for **A2B (Agent-to-Business)**: agents safely doing business work through existing systems.
 
+ACC deliberately keeps a small normative core. See [Design Rationale And Boundaries](DESIGN_RATIONALE.md) for the concerns ACC knows about but intentionally leaves to business authorization, runtime policy, approval systems, compliance policy, or other contracts.
+
+| Dimension | Current state |
+|---|---|
+| Specification | Stable ACC v1 core, governed by Semantic Versioning |
+| Ecosystem | Early adoption; independent implementations are welcome |
+| Conformance | Profiles, self-assessment, and machine-readable v1 reference vectors |
+
 ## Why ACC Exists
 
 Existing business systems were not designed for A2B. Once an agent can call business APIs, teams need a standard way to answer:
@@ -55,12 +63,13 @@ x-agent-capability:
 
 See [SPEC.md](SPEC.md) for the normative field model.
 
-ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.0`; product or runtime versions are separate.
+ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.1`; product or runtime versions are separate.
 
 ## Implement ACC
 
 - Read the non-normative [Implementer's Guide](IMPLEMENTER_GUIDE.md).
 - Choose a claim from [Conformance Profiles](conformance/PROFILES.md).
+- Run the applicable [machine-readable ACC v1 vectors](conformance/v1/README.md).
 - Publish evidence using [Implementation Registration and Self-Assessment](conformance/SELF_ASSESSMENT.md).
 - Submit a pull request to the neutral [implementation registry](IMPLEMENTATIONS.md).
 
@@ -75,9 +84,13 @@ examples/                     OpenAPI examples
 conformance/README.md         Implementation conformance checklist
 conformance/PROFILES.md       Parser, generator, runtime, and policy profiles
 conformance/SELF_ASSESSMENT.md Open registration and evidence template
+conformance/v1/                Machine-readable ACC v1 conformance vectors
 IMPLEMENTER_GUIDE.md          Non-normative implementation architecture guidance
+DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns belong
+DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries
 IMPLEMENTATIONS.md            Known implementations and claim language
-RELEASE_NOTES_v1.0.0.md       Stable ACC v1 release summary
+RELEASE_NOTES_v1.0.1.md       Current ACC v1 patch release summary
+RELEASE_NOTES_v1.0.0.md       Initial stable ACC v1 release summary
 GOVERNANCE.md                 Stewardship, versioning, and extension rules
 CONTRIBUTING.md               Contribution rules for contract changes
 CHANGELOG.md                  Public changes

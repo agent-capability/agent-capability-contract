@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentcapability.org/conformance/v1/vectors.schema.json",
+  "title": "ACC v1 Conformance Vector Corpus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "acc_version", "specification_release", "vectors"],
+  "properties": {
+    "format_version": { "type": "integer", "const": 1 },
+    "acc_version": { "type": "integer", "const": 1 },
+    "specification_release": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+    "vectors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "profile", "kind", "assertion", "input", "expected"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^T-[A-Z]+-[0-9]{2}$" },
+          "profile": { "enum": ["parser", "runtime"] },
+          "kind": { "enum": ["declaration", "exposure", "approval", "risk-default", "audit-hint"] },
+          "assertion": { "type": "string", "minLength": 1 },
+          "input": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["declaration"],
+            "properties": {
+              "declaration": { "type": "object" },
+              "http_method": { "type": "string" },
+              "scope_allowed": { "type": "boolean" },
+              "trusted_subject": { "type": "boolean" },
+              "parameter_schema": { "type": "object" },
+              "args": { "type": "object" }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "valid": { "type": "boolean" },
+              "diagnostic": { "enum": ["unsupported_version", "invalid_declaration"] },
+              "exposed": { "type": "boolean" },
+              "decision": { "enum": ["allow", "approval_required", "reject_invalid_arguments"] },
+              "effective_risk": { "enum": ["low", "medium", "high"] },
+              "audit_sensitive": { "type": "boolean" }
+            },
+            "minProperties": 1
+          }
+        }
+      }
+    }
+  }
+}

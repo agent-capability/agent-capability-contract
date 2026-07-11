@@ -15,6 +15,7 @@ function readJson(relativePath) {
 
 function walk(directory) {
   return readdirSync(directory).flatMap((name) => {
+    if (name === '.git' || name === 'node_modules') return [];
     const path = join(directory, name);
     return statSync(path).isDirectory() ? walk(path) : [path];
   });
@@ -23,6 +24,7 @@ function walk(directory) {
 const packageJson = readJson('package.json');
 const schema = readJson('schemas/acc.v1.schema.json');
 const spec = readFileSync(join(root, 'SPEC.md'), 'utf8');
+const changelog = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
 
 const release = String(packageJson?.version || '');
 const major = Number(release.split('.')[0]);
@@ -40,7 +42,15 @@ if (schema?.properties?.version?.const !== major) {
   failures.push(`schemas/acc.v${major}.schema.json: declaration version must match specification major ${major}`);
 }
 
-const markdownFiles = walk(root).filter((path) => extname(path) === '.md' && !path.includes(`${join(root, '.git')}/`));
+if (!existsSync(join(root, `RELEASE_NOTES_v${release}.md`))) {
+  failures.push(`RELEASE_NOTES_v${release}.md: current release notes are missing`);
+}
+
+if (!changelog.includes(`## ${release} -`)) {
+  failures.push(`CHANGELOG.md: current release ${release} is missing`);
+}
+
+const markdownFiles = walk(root).filter((path) => extname(path) === '.md');
 const markdownLink = /\[[^\]]*\]\(([^)]+)\)/g;
 
 for (const path of markdownFiles) {

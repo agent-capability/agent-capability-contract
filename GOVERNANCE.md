@@ -75,6 +75,13 @@ Business-specific metadata should use:
 
 Unknown ACC fields must be ignored by compliant runtimes unless standardized later.
 
+Unknown-field tolerance guarantees that a newer declaration remains parseable. It does not by itself guarantee that ignoring a new security field is safe. A field that affects exposure, approval, authority boundaries, or redaction may be added within the same major family only when:
+
+- an older runtime ignoring it produces an equally safe or more conservative outcome; or
+- the declaration includes a conservative fallback already understood by that major family.
+
+Otherwise the change requires a new major contract family or an explicit capability-negotiation mechanism.
+
 ## Implementations
 
 ACC implementations may include runtime features that are not part of ACC.
