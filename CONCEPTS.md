@@ -71,36 +71,8 @@ This recurring problem family is broader than any one transport or binding. It d
 | ACC | Capability declaration contract for A2B. | Defines portable business capability metadata. |
 | ACC runtime | Any implementation that parses, validates, or enforces ACC declarations. | Runtime implementation, not the contract itself. |
 
-## Recommended Messaging
+## Scope in Plain Language
 
-Use:
+ACC v1 is a concrete, machine-readable capability contract for A2B systems. It is maintained independently from product implementations, and no implementation defines the standard merely by supporting it.
 
-```text
-ACC is the capability contract for A2B.
-```
-
-Also accurate:
-
-```text
-ACC v1 is a concrete, machine-readable contract for recurring agent-action governance questions in A2B systems.
-```
-
-Avoid:
-
-```text
-ACC is a product-specific configuration format.
-```
-
-Avoid:
-
-```text
-Any implementation is the ACC standard.
-```
-
-Avoid:
-
-```text
-ACC v1 is the universal contract for every agent action.
-```
-
-The standard and the implementation should remain clearly separated.
+The governance questions described above may recur in other agent-action environments. That observation motivates research and future bindings, but it does not expand the current ACC v1 compatibility claim beyond its documented A2B scope.
