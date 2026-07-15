@@ -19,6 +19,8 @@ ACC is the capability contract for **A2B (Agent-to-Business)**: agents safely do
 
 ACC deliberately keeps a small normative core. See [Design Rationale And Boundaries](DESIGN_RATIONALE.md) for the concerns ACC knows about but intentionally leaves to business authorization, runtime policy, approval systems, compliance policy, or other contracts.
 
+For an implementation-neutral map of adjacent protocols, runtime controls, policy systems, and workflow layers, see [ACC in the Agent Governance Landscape](LANDSCAPE.md).
+
 | Dimension | Current state |
 |---|---|
 | Specification | Stable ACC v1 core, governed by Semantic Versioning |
@@ -89,6 +91,7 @@ proposals/                     Public normative proposal process and template
 IMPLEMENTER_GUIDE.md          Non-normative implementation architecture guidance
 DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns belong
 DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries
+LANDSCAPE.md                  Non-normative map of adjacent protocols and governance layers
 IMPLEMENTATIONS.md            Known implementations and claim language
 RELEASE_NOTES_v1.0.1.md       Current ACC v1 patch release summary
 RELEASE_NOTES_v1.0.0.md       Initial stable ACC v1 release summary
