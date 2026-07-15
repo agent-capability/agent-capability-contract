@@ -4,7 +4,7 @@ ACC is maintained as an open contract, not as a product-private configuration fo
 
 ## Stewardship
 
-ACC was initially proposed by the BailingHub project. It is maintained as an implementation-neutral open contract.
+ACC v1 was developed from A2B engineering work, including early implementation experience in the BailingHub project. It is maintained as an implementation-neutral open contract.
 
 The long-term goal is to keep ACC implementation-neutral:
 
@@ -27,7 +27,7 @@ Maintainers MUST preserve the following boundaries:
 - ACC governance, versioning, and licensing must remain usable by independent open-source and commercial implementations;
 - registry inclusion does not imply certification, endorsement, partnership, security review, or production-readiness approval.
 
-Historical attribution does not grant control over implementations and does not make the contract dependent on the project that first proposed it.
+Implementation history does not grant control over ACC and does not make the contract dependent on any implementation.
 
 ## Versioning
 
