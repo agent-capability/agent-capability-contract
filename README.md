@@ -17,6 +17,8 @@ ACC is maintained as an independent, implementation-neutral standard. No product
 
 ACC is the capability contract for **A2B (Agent-to-Business)**: agents safely doing business work through existing systems.
 
+The governance questions ACC addresses can recur whenever an agent action crosses an effect, authority, or trust boundary. This is a broader research observation, not a claim that ACC v1 already governs every agent action. See [Concepts](CONCEPTS.md) for the distinction between recurring questions and the current normative scope.
+
 ACC deliberately keeps a small normative core. See [Design Rationale And Boundaries](DESIGN_RATIONALE.md) for the concerns ACC knows about but intentionally leaves to business authorization, runtime policy, approval systems, compliance policy, or other contracts.
 
 For an implementation-neutral map of adjacent protocols, runtime controls, policy systems, and workflow layers, see [ACC in the Agent Governance Landscape](LANDSCAPE.md).
@@ -80,6 +82,7 @@ ACC v1 declarations use `version: 1`. Exact specification revisions use reposito
 ```text
 SPEC.md                       Normative ACC v1 specification
 CONCEPTS.md                   A2B and ACC terminology
+CONCEPTS.zh-CN.md             Chinese translation of core concepts and scope boundaries
 bindings/openapi.md           OpenAPI extension binding
 schemas/acc.v1.schema.json    Machine-readable JSON Schema
 examples/                     OpenAPI examples

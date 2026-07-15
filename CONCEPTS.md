@@ -50,6 +50,18 @@ ACC is the standard contract.
 Implementations turn ACC declarations into runtime behavior.
 ```
 
+## Why These Questions Recur
+
+An agent can reason, draft, or simulate without producing an external effect. Governance becomes structurally important when an agent action crosses one or more boundaries:
+
+- an **effect boundary**, where the action reads controlled data, changes state, sends a message, moves funds, or creates another real-world consequence;
+- an **authority boundary**, where the action uses authority granted by a user, organization, application, or external system;
+- a **trust boundary**, where the declaring, deciding, executing, and authorizing parties are not all in the same trust domain.
+
+Across such boundaries, systems repeatedly need to answer related questions about capability reach, acting principals, consequences, human intervention, accountability, and execution semantics. A deployment may answer that no subject or approval is required for a particular low-consequence operation; that is still an explicit governance decision.
+
+This recurring problem family is broader than any one transport or binding. It does **not** mean that ACC v1 already governs every agent action, or that its current fields can be copied unchanged into MCP, A2A, app intents, operating-system permissions, or cross-organization delegation. ACC v1 remains the concrete contract for A2B business operations, with OpenAPI as its first binding. Broader applicability requires separate bindings, failure semantics, implementation evidence, and public proposal review.
+
 ## Adjacent Terms
 
 | Term | Meaning | Relationship |
@@ -67,6 +79,12 @@ Use:
 ACC is the capability contract for A2B.
 ```
 
+Also accurate:
+
+```text
+ACC v1 is a concrete, machine-readable contract for recurring agent-action governance questions in A2B systems.
+```
+
 Avoid:
 
 ```text
@@ -77,6 +95,12 @@ Avoid:
 
 ```text
 Any implementation is the ACC standard.
+```
+
+Avoid:
+
+```text
+ACC v1 is the universal contract for every agent action.
 ```
 
 The standard and the implementation should remain clearly separated.

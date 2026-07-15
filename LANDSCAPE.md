@@ -34,6 +34,25 @@ These layers are complementary. An implementation may use OpenAPI, MCP, A2A, a r
 | Enterprise policy and authorization | Is this subject allowed to perform this action now? | RBAC, ABAC, XACML, OPA, Cedar, IAM, application authorization | These systems retain authority. ACC must not replace them. |
 | Workflow and transaction coordination | How are multi-step work, compensation, retries, and recovery coordinated? | Workflow engines, Saga coordinators, approval systems | ACC can describe individual capabilities, but does not promise cross-operation atomicity. |
 
+## Recurring Governance Questions Across Boundaries
+
+The technologies in this landscape do not all solve the same problem, but consequential agent actions repeatedly raise a related set of governance questions:
+
+| Question | Portable concern | Current ACC v1 expression |
+|---|---|---|
+| What may the agent-facing surface expose? | Capability reach | `enabled`, `scope` |
+| Must the action be bound to a trusted business actor? | Acting principal | `subject` |
+| What kind of consequence can the operation produce? | Risk signal | `risk` |
+| When must execution pause for an external decision? | Human intervention intent | `approval` |
+| What evidence must remain for explanation and traceability? | Accountability | `audit` and runtime evidence |
+| What portable execution properties should be preserved? | Execution semantics | `execution` |
+
+These questions become relevant when an action crosses an effect, authority, or trust boundary. They can recur in business APIs, MCP tools, app intents, A2A delegation, and cross-organization automation.
+
+Recurrence does not imply protocol ownership. A2A additionally needs task, delegation, and multi-party semantics. App and operating-system integrations need sandbox, permission, lifecycle, and user-consent semantics. Cross-organization systems need credentials, disclosure, revocation, and responsibility models. ACC must not absorb those layers merely because some governance questions are shared.
+
+ACC v1 is the concrete A2B and operation-level contract in this landscape. Whether its core semantics can support other environments must be demonstrated through separate bindings, explicit failure behavior, independent implementations, and public proposal review.
+
 ## Adjacent Protocols and Specifications
 
 ### OpenAPI and JSON Schema
@@ -101,6 +120,14 @@ This separation does not mean every deployment needs a standalone ACC server. AC
 ### Is ACC a replacement for MCP or A2A?
 
 No. MCP and A2A define connection and collaboration mechanisms. ACC defines portable governance metadata for operations in existing business systems. They can be composed.
+
+### Is ACC intended to govern every agent action?
+
+No. ACC v1 has a precise normative scope: A2B business operations, with OpenAPI as the first binding. The governance questions ACC addresses can recur when agents cross other effect, authority, or trust boundaries, but broader applicability is a research and binding question rather than a current compatibility claim.
+
+### Does every agent action need approval or a business subject?
+
+No. The structural requirement is to reach an explicit governance conclusion. A low-consequence operation may require no subject and no approval, while a consequential operation may require both. ACC describes those differences; it does not make every operation high risk.
 
 ### Is ACC an authorization system?
 
