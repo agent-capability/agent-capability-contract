@@ -65,7 +65,7 @@ x-agent-capability:
 
 规范正文见 [SPEC.md](SPEC.md)。
 
-ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.1` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
+ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.2` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
 
 ## 实现 ACC
 
@@ -94,7 +94,8 @@ DESIGN_RATIONALE.md           ACC 保持小核心的原因与相邻职责边界
 DESIGN_RATIONALE.zh-CN.md     设计依据与边界中文版
 LANDSCAPE.md                  相邻协议与治理层的非规范性分层说明
 IMPLEMENTATIONS.md            已知实现与声明口径
-RELEASE_NOTES_v1.0.1.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.2.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.1.md       上一个 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.0.md       ACC v1 首个稳定规范发布摘要
 GOVERNANCE.md                 维护、版本和扩展规则
 CONTRIBUTING.md               契约修改贡献规则

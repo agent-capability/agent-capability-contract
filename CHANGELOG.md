@@ -2,8 +2,18 @@
 
 ## Unreleased
 
+## 1.0.2 - 2026-07-18
+
 - Added a public normative proposal lifecycle and template.
 - Clarified that core-field admission checks are necessary but not sufficient.
+- Added an implementation-neutral landscape of adjacent transport, identity, runtime-control, policy, workflow, and business-authorization layers.
+- Clarified that broader cross-boundary agent-action governance is a research direction, while ACC v1 remains the concrete A2B contract with OpenAPI as its first binding.
+- Clarified that `subject.required` applies at the receiving runtime's trust boundary and does not prove subject continuity across multiple hops.
+- Clarified that runtime-authored approval assertions and audit records are not automatically independently verifiable evidence.
+- Documented identity, delegation, canonicalization, freshness, replay protection, and third-party approval evidence as complementary protocol concerns.
+- Refined provenance wording without granting any implementation privileged status in ACC governance or compatibility.
+- Added Chinese concept and design-boundary documentation.
+- No schema, core field, declaration compatibility, or conformance outcome changed; existing ACC v1 declarations require no migration.
 
 ## 1.0.1 - 2026-07-12
 
