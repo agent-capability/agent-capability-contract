@@ -171,6 +171,10 @@ Fields:
 
 If `subject.required` is true and the runtime has no trusted acting subject, the capability SHOULD NOT be shown to the agent.
 
+The requirement applies at the runtime's current trust boundary. A subject identifier copied from model output, tool arguments, or an unverified upstream message is not a trusted acting subject merely because the sender labels it as one. The receiving runtime MUST resolve or verify subject trust through its own trusted context or an explicit identity/delegation binding.
+
+ACC v1 does not prove that the same subject has remained unmodified across multiple agent, runtime, or organizational hops. End-to-end subject continuity requires a complementary identity or delegation mechanism with its own issuer, verification, freshness, and failure semantics.
+
 At invocation time, the business system MUST still verify the subject according to its own permission model.
 
 ### 4.6 `approval`
@@ -219,6 +223,8 @@ Approval condition semantics:
 - If an invocation supplies a value whose JSON type is incompatible with the condition parameter schema, the runtime MUST reject the invocation before it reaches the business operation. It MUST NOT silently treat the condition as unmatched.
 
 ACC declares approval intent. It does not define who approves, where approval occurs, or how the business workflow is completed.
+
+An approval field or runtime-authored audit entry is not, by itself, independently verifiable evidence that approval occurred. ACC v1 does not standardize canonical serialization, digital signatures, issuer keys, freshness anchors, or replay protection for approval evidence. Deployments that require third-party verification MUST provide those semantics in a complementary approval, identity, or evidence protocol.
 
 ### 4.7 `audit`
 

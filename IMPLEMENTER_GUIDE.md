@@ -114,6 +114,20 @@ The model or caller may propose a capability and arguments. It must not determin
 
 Machine-readable reference inputs and abstract expected outcomes are published under [conformance/v1](conformance/v1/README.md). They test portable decisions rather than a particular queue, database, hash algorithm, or user interface.
 
+### 6.1 Trust Across Multiple Hops
+
+`subject.required: true` distinguishes a capability that needs a trusted acting subject from one that does not. It does not make an arbitrary inbound `subject` field trustworthy, and it does not establish an end-to-end delegation chain.
+
+For a chain such as `Agent A -> Runtime B -> Runtime C -> business operation`, every trust boundary must answer separately:
+
+- who asserted the subject;
+- how that assertion was authenticated or verified;
+- whether delegation to the next hop is allowed;
+- what capability, arguments, task, audience, and time window the delegation covers;
+- what happens when verification, freshness, or replay checks fail.
+
+A runtime must not upgrade model output or an unverified upstream claim into trusted subject context. Deployments that need cross-hop continuity should use a complementary identity or delegation mechanism and document its binding to ACC capability identity and invocation arguments. ACC compatibility alone is not evidence that the subject at the final hop is the subject authenticated at the first hop.
+
 ## 7. Approval Intent Reference Flow
 
 ACC declares that approval is required; it does not standardize the workflow owner or persistence model.
@@ -142,6 +156,20 @@ Recommended safety properties:
 
 After approval, a runtime may resume a suspended invocation, enqueue a new invocation, or rerun a deterministic snapshot. Those are implementation choices, not ACC semantics.
 
+### 7.1 Traceability And Independently Verifiable Evidence
+
+An audit trail written by the same runtime that resolves the subject and enforces approval can provide useful operational traceability inside that runtime's trust domain. It is not independent proof against compromise of that runtime.
+
+Where a deployment requires approval evidence that another party can verify, it should bind at least the subject, capability identity, canonical invocation arguments, task or request identity, decision, issuer, and validity context before execution. The deployment must also define:
+
+- one canonical byte representation shared by signer and verifier;
+- signature and key-discovery rules;
+- freshness and clock assumptions;
+- nonce, sequence, or other replay protection;
+- fail-closed behavior when any verification step is unavailable or ambiguous.
+
+These details are deliberately not ACC v1 semantics. A deployment may use a separate approval-evidence or delegation protocol, provided it does not present that protocol's guarantees as guarantees of ACC itself.
+
 ## 8. Security Invariants and Failure Modes
 
 These are specification-derived invariants, not claims about how often a particular implementation fails.
@@ -150,9 +178,11 @@ These are specification-derived invariants, not claims about how often a particu
 |---|---|---|
 | ACC controls reach; the business system controls authority. | Treating `scope` or `subject.required` as final business permission. | Re-authorize the acting subject inside the business system at call time. |
 | Governance metadata is trusted contract input, not model output. | Letting generated text lower risk, invent a subject, approve itself, or disable audit. | Keep governance decisions outside the model-controlled payload. |
+| Subject trust is established at a trust boundary; it does not compose by relabeling an upstream claim. | Treating an inbound subject identifier as proof of end-to-end identity or delegation. | Resolve or verify the subject at each boundary and use a complementary delegation mechanism when continuity across hops is required. |
 | Approval comparisons are JSON type-aware. | Coercing `"1000"` to `1000` or `"true"` to `true`. | Validate against OpenAPI and use strict JSON equality and numeric rules. |
 | Unknown fields have no implicit security meaning. | A runtime-specific extension silently bypasses scope, approval, or audit. | Ignore unknown ACC fields or process them only under an explicit non-ACC policy namespace. |
 | Approval applies to a reviewed invocation. | Approval for one argument set is reused for another. | Bind the decision to capability identity and canonical arguments. |
+| Runtime audit records are traceability, not automatically independent proof. | The same compromised runtime authors the approval assertion and the evidence used to verify it. | Use externally verifiable, pre-execution evidence when the threat model requires it. |
 | Sensitive declarations affect observability. | Raw secrets or personal data enter logs, traces, or metric labels. | Redact or summarize before persistence and export. |
 | Unsupported versions are visible. | A runtime silently interprets a newer declaration using older semantics. | Reject or skip it with diagnostics. |
 

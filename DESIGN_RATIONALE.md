@@ -54,6 +54,8 @@ More fields are not automatically better. A field that cannot pass this test cre
 | Tenant or merchant isolation | Isolation must remain enforced when an API is called outside an agent runtime. Gateway parameter injection is not a security boundary. | Business data and authorization layers |
 | Identity representation | Sessions, JWT claims, service principals, certificates, directory groups, and signed tickets are not interchangeable. | Runtime identity bridge and business system |
 | Approval assignee and workflow | Who approves, quorum, delegation, expiry, UI, and escalation depend on an organization's process. | External approval owner |
+| Cross-hop subject continuity and delegation | A Boolean subject requirement cannot prove identity continuity across agents, runtimes, organizations, issuers, and trust domains. | Identity, delegation, or protocol-binding layer |
+| Independently verifiable approval evidence | Canonical bytes, signatures, issuer keys, freshness, replay protection, and external verification require a complete evidence protocol and threat model. | Approval-evidence, attestation, or delegation layer |
 | Business deny rules | Blacklists, order state, inventory, refund limits, and contractual restrictions require authoritative business data. | Business policy and authorization layer |
 | Cross-field or contextual invariants | Rules such as refund amount not exceeding the current order balance require fresh, authorized business state. | Business operation or preflight API |
 | Context fetching | Where a value comes from, who may fetch it, freshness, failure, and caching require a separate data-access contract. | Runtime integration or business API |

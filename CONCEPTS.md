@@ -62,6 +62,8 @@ Across such boundaries, systems repeatedly need to answer related questions abou
 
 This recurring problem family is broader than any one transport or binding. It does **not** mean that ACC v1 already governs every agent action, or that its current fields can be copied unchanged into MCP, A2A, app intents, operating-system permissions, or cross-organization delegation. ACC v1 remains the concrete contract for A2B business operations, with OpenAPI as its first binding. Broader applicability requires separate bindings, failure semantics, implementation evidence, and public proposal review.
 
+The same distinction applies to multi-hop trust. ACC can declare that a capability requires a trusted acting subject and approval intent at a boundary. It does not, by itself, prove that an identity or approval remained authentic and unmodified across a chain of agents, runtimes, or organizations. Identity continuity, delegation, independently verifiable evidence, freshness, and replay protection are complementary protocol concerns rather than implicit guarantees of an ACC declaration.
+
 ## Adjacent Terms
 
 | Term | Meaning | Relationship |
