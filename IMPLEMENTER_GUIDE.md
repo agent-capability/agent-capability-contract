@@ -22,8 +22,8 @@ ACC does not require a particular programming language, database, model provider
 
 Before building, choose the claim that matches the component:
 
-- **ACC parser**: reads and validates ACC declarations.
-- **ACC generator**: produces ACC declarations from source code, annotations, or another contract.
+- **ACC binding parser**: extracts and validates ACC declarations from a named carrier protocol.
+- **ACC binding generator**: produces a named binding from source code, annotations, or another contract.
 - **ACC runtime**: applies ACC exposure and invocation semantics.
 - **ACC policy component**: evaluates a documented subset of ACC governance semantics for another runtime or gateway.
 
@@ -35,7 +35,7 @@ The following architecture is a reference, not a required topology:
 
 ```mermaid
 flowchart LR
-    A["OpenAPI + ACC declaration"] --> B["Contract ingestion"]
+    A["Binding-native operation + ACC declaration"] --> B["Binding ingestion"]
     B --> C["Capability registry or adapter"]
     C --> D["Exposure policy"]
     D --> E["Agent, gateway, or caller"]
@@ -50,8 +50,8 @@ flowchart LR
 
 | Module | ACC relationship | Implementation freedom |
 |---|---|---|
-| Contract ingestion | **Normative** for parsers and runtimes: read the declaration, validate required fields, preserve OpenAPI parameter schemas, and diagnose unsupported versions. | Parser library, build-time compiler, gateway plugin, generated code, or another form. |
-| Capability registry or adapter | **Recommended**: keep the normalized operation, parameter schema, ACC metadata, and source location together. | In memory, generated artifact, database, gateway configuration, or no persistent registry. |
+| Binding ingestion | **Normative** for binding parsers: extract the declaration, validate required fields, preserve the binding-native input schema, and diagnose unsupported versions. | Parser library, build-time compiler, gateway plugin, generated code, or another form. |
+| Capability registry or adapter | **Recommended**: keep the binding-qualified operation, input schema, ACC metadata, and source location together. | In memory, generated artifact, database, gateway configuration, or no persistent registry. |
 | Exposure policy | **Normative** for runtimes: apply `enabled`, `scope`, trusted-subject availability, and safe handling of unsupported declarations before exposing a capability. | Route policy, tenant policy, gateway policy, static allowlist, or another documented policy context. |
 | Caller or selection layer | **Optional**: an LLM function-calling loop is one possible caller, not an ACC requirement. | Agent runtime, deterministic workflow, API gateway, MCP gateway, human-operated tool, or another caller. |
 | Pre-invocation governance | **Normative** for runtimes: validate arguments, risk, approval intent, execution hints, and sensitive-data handling before business execution. | Inline middleware, policy engine, sidecar, gateway filter, or generated wrapper. |
@@ -66,9 +66,9 @@ Cost tracking, console UI, routing products, model orchestration, HMAC signature
 
 **Normative and recommended sequence:**
 
-1. Parse the OpenAPI operation and locate `x-agent-capability`.
+1. Parse a supported binding and locate its ACC declaration carrier.
 2. Validate `version`, `enabled`, and `scope`.
-3. Resolve standard OpenAPI `parameters` and `requestBody` schemas.
+3. Resolve the binding-native input schema and map it to the ACC JSON value model.
 4. Validate that every `approval.when.param` resolves to a declared, typed argument.
 5. Reject or skip unsupported major versions with diagnostics.
 6. Ignore unknown ACC fields safely.
@@ -76,6 +76,8 @@ Cost tracking, console UI, routing products, model orchestration, HMAC signature
 8. Produce a normalized capability record or equivalent generated artifact.
 
 A runtime should keep the original operation identity and source location so diagnostics can point back to the contract authors.
+
+For the OpenAPI binding, steps 1 and 3 mean locating operation-level `x-agent-capability` and resolving standard OpenAPI `parameters` plus `requestBody` schemas. Other bindings must define equivalent extraction and mapping under [Binding Requirements](bindings/README.md).
 
 ## 5. Exposure Lifecycle
 
@@ -85,7 +87,7 @@ Before a capability becomes visible to an agent or caller:
 2. Apply the runtime's documented scope allowlist semantics.
 3. If `subject.required` is true, require a trusted acting subject before exposure or invocation.
 4. Apply safe risk defaults when `risk.level` is omitted.
-5. Preserve the standard parameter schema used for argument generation and validation.
+5. Preserve the binding-native input schema used for argument generation and validation.
 6. Emit diagnostics for skipped or unsupported declarations.
 
 For approval evaluation, `approval.required: true` is unconditional. Otherwise, `approval.when` uses ANY semantics: the first or any matching condition is sufficient to create an approval intent. Implementations may evaluate every condition for diagnostics, but a non-matching condition cannot cancel another matching condition.
@@ -98,7 +100,7 @@ The following sequence is suitable for an LLM tool loop, API gateway, determinis
 
 ```text
 select capability
-  -> validate arguments against OpenAPI
+  -> validate arguments against the binding-native input schema
   -> resolve trusted acting subject
   -> evaluate scope and runtime policy
   -> evaluate risk and approval intent

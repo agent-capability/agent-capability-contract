@@ -27,8 +27,8 @@ Maintainers verify submission completeness, evidence reachability, claim scope, 
 
 | Profile | Meaning |
 |---|---|
-| ACC parser | Reads and validates `x-agent-capability`. |
-| ACC generator | Produces ACC-compatible declarations while keeping business parameters in standard OpenAPI schemas. |
+| ACC binding parser | Extracts and validates ACC declarations from a named binding, such as OpenAPI `x-agent-capability`. |
+| ACC binding generator | Produces a named ACC binding while keeping business parameters in the carrier protocol's standard schemas. |
 | ACC runtime | Applies exposure, governance, authority-boundary, and traceability semantics. |
 | ACC policy component | Enforces a named subset of ACC semantics for another runtime or gateway. |
 

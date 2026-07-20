@@ -50,7 +50,7 @@ The business system controls authority.
 
 ## OpenAPI Binding
 
-The first ACC binding is OpenAPI extension field:
+OpenAPI is the first standardized ACC binding. It carries the ACC Core declaration in the operation-level `x-agent-capability` extension:
 
 ```yaml
 x-agent-capability:
@@ -65,7 +65,7 @@ x-agent-capability:
     readonly: true
 ```
 
-See [SPEC.md](SPEC.md) for the normative field model.
+See [SPEC.md](SPEC.md) for the normative core field model, [Binding Requirements](bindings/README.md) for the interface every binding must define, and [OpenAPI Binding](bindings/openapi.md) for the first carrier-specific mapping.
 
 ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.2`; product or runtime versions are separate.
 
@@ -83,6 +83,7 @@ ACC v1 declarations use `version: 1`. Exact specification revisions use reposito
 SPEC.md                       Normative ACC v1 specification
 CONCEPTS.md                   A2B and ACC terminology
 CONCEPTS.zh-CN.md             Chinese translation of core concepts and scope boundaries
+bindings/README.md            Common requirements for ACC bindings
 bindings/openapi.md           OpenAPI extension binding
 schemas/acc.v1.schema.json    Machine-readable JSON Schema
 examples/                     OpenAPI examples

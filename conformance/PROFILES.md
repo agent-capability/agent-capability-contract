@@ -10,8 +10,8 @@ Profiles let implementations make precise compatibility claims without pretendin
 Recommended public wording:
 
 ```text
-Implements the ACC v1 Parser Profile.
-Implements the ACC v1 Generator Profile.
+Implements the ACC v1 OpenAPI Binding Parser Profile.
+Implements the ACC v1 OpenAPI Binding Generator Profile.
 Implements the ACC v1 Runtime Profile.
 Implements the ACC v1 Policy Component Profile for: risk, approval, audit.
 ```
@@ -24,11 +24,13 @@ An implementation should include:
 - evidence links;
 - unsupported optional fields or known limitations.
 
+Parser and generator claims MUST name their binding. Future bindings define their own extraction, native-schema mapping, and binding-specific evidence under [Binding Requirements](../bindings/README.md).
+
 Do not use `ACC certified` or imply review by an independent certification body.
 
-## 2. Parser Profile
+## 2. OpenAPI Binding Parser Profile
 
-For libraries or tools that read ACC declarations.
+For libraries or tools that read ACC declarations from OpenAPI operations.
 
 Minimum behavior:
 
@@ -42,7 +44,7 @@ Minimum behavior:
 
 A parser does not claim to enforce runtime governance.
 
-## 3. Generator Profile
+## 3. OpenAPI Binding Generator Profile
 
 For SDKs, annotations, code generators, or authoring tools that produce ACC declarations.
 
@@ -64,11 +66,11 @@ For runtimes, control planes, or gateways that expose and invoke ACC-declared ca
 
 Minimum behavior:
 
-- satisfies the Parser Profile or consumes equivalent validated artifacts;
+- satisfies an applicable binding Parser Profile or consumes an equivalent validated capability artifact;
 - applies exposure semantics for `enabled`, `scope`, and trusted-subject availability;
 - applies safe risk defaults;
 - evaluates `approval.required` and `approval.when` before invocation;
-- validates arguments against standard OpenAPI schemas without implicit JSON type coercion;
+- validates arguments against the binding-native input schema without implicit coercion that changes ACC JSON values;
 - maps timeout and rate-limit hints to documented runtime policy;
 - preserves the boundary between capability reach and final business authorization;
 - prevents model-controlled input from overriding governance metadata;

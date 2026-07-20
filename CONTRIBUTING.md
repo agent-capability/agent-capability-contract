@@ -19,7 +19,7 @@ Poor candidates:
 - implementation-specific table names, console UI fields, or deployment assumptions;
 - business-specific approval workflows;
 - provider-specific model behavior;
-- fields that duplicate standard OpenAPI parameter schema;
+- fields that duplicate binding-native request or response schemas;
 - fields that silently change security behavior without testable semantics.
 
 ## Change Process

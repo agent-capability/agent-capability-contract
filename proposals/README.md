@@ -4,6 +4,10 @@ ACC proposals provide a public, implementation-neutral path for changing normati
 
 Use [TEMPLATE.md](TEMPLATE.md) for a new proposal.
 
+## Current Drafts
+
+- [Agent-Facing Capability Deprecation](agent-facing-deprecation.md) records a minimal advisory deprecation candidate. It is not part of released ACC v1 and currently lacks the independent implementation evidence required for review.
+
 ## States
 
 | State | Meaning |

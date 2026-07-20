@@ -48,7 +48,7 @@ ACC 管 reach：Agent 最多能触达哪些能力。
 
 ## OpenAPI 绑定
 
-ACC v1 的首个绑定是 OpenAPI 扩展字段：
+OpenAPI 是 ACC v1 的首个标准化 Binding。它通过 operation 级 `x-agent-capability` 扩展承载 ACC Core 声明：
 
 ```yaml
 x-agent-capability:
@@ -63,7 +63,7 @@ x-agent-capability:
     readonly: true
 ```
 
-规范正文见 [SPEC.md](SPEC.md)。
+规范性核心字段模型见 [SPEC.md](SPEC.md)，所有 Binding 必须遵守的公共接口要求见 [Binding Requirements](bindings/README.md)，首个载体映射见 [OpenAPI Binding](bindings/openapi.md)。
 
 ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.2` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
 
@@ -81,11 +81,12 @@ ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.2` 这类 Tag 标
 SPEC.md                       ACC v1 规范正文
 CONCEPTS.md                   A2B 与 ACC 核心概念
 CONCEPTS.zh-CN.md             核心概念与范围边界中文版
+bindings/README.md            ACC Binding 公共接口要求
 bindings/openapi.md           OpenAPI 扩展绑定说明
 schemas/acc.v1.schema.json    机器可读 JSON Schema
 examples/                     OpenAPI 示例
 conformance/README.md         实现者兼容性检查清单
-conformance/PROFILES.md       Parser、Generator、Runtime 与策略组件 Profile
+conformance/PROFILES.md       Binding Parser、Binding Generator、Runtime 与策略组件 Profile
 conformance/SELF_ASSESSMENT.md 开放登记与证据模板
 conformance/v1/                机器可读的 ACC v1 Conformance 测试向量
 proposals/                     公开的规范提案流程与模板

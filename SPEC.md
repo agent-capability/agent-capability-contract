@@ -5,7 +5,7 @@ Ecosystem maturity: Early adoption
 Conformance: Self-assessment with machine-readable reference vectors
 Short name: ACC v1
 Specification release: 1.0.2
-OpenAPI extension: `x-agent-capability`
+First standardized binding: OpenAPI (`x-agent-capability`)
 
 ## 1. Scope
 
@@ -47,54 +47,44 @@ An ACC-compatible runtime MUST NOT treat ACC as a replacement for business autho
 
 ACC core fields are stable and have explicit runtime meaning.
 
-Unknown fields inside `x-agent-capability` MUST be ignored by runtimes unless they are standardized in a later ACC version.
+Unknown fields inside the ACC declaration object MUST be ignored by runtimes unless they are standardized in a later ACC version.
 
-OpenAPI operation-level extension fields such as `x-business-*` or implementation-specific fields MAY be preserved in an extension bag, but MUST NOT implicitly alter allowlist, risk, approval, rate limit, audit, or signature behavior.
+Binding-native or implementation-specific extension fields MAY be preserved in an extension bag, but MUST NOT implicitly alter allowlist, risk, approval, rate limit, audit, or signature behavior. For example, the OpenAPI binding may preserve operation-level `x-business-*` fields without assigning them ACC semantics.
 
-### 2.3 Parameters Stay In OpenAPI
+### 2.3 Parameters Stay In Binding-Native Schemas
 
-Business input parameters MUST remain in standard OpenAPI `parameters` and `requestBody` JSON Schema.
+Business input parameters MUST remain in the standard input-schema mechanism of the bound protocol.
 
 ACC MUST NOT become a duplicate schema language for business parameters.
 
-## 3. OpenAPI Binding
+Each binding MUST define how its native input schema and invocation values map to the ACC JSON value model used by validation and approval conditions. Binding requirements are defined in [bindings/README.md](bindings/README.md).
 
-ACC v1 uses the OpenAPI extension field `x-agent-capability` on an operation object.
+## 3. Core And Binding Model
 
-An operation is considered ACC-declared when it contains `x-agent-capability`.
+ACC Core is the declaration object defined by the field model in this specification. A binding carries that object on a protocol-specific operation and resolves the operation's native input schema into a form a core runtime can validate.
 
-An operation is exposed only when:
+An ACC-declared operation is exposed only when:
 
-- `x-agent-capability.enabled` is `true`;
-- `x-agent-capability.scope` is present and non-empty;
+- `enabled` is `true`;
+- `scope` is present and non-empty;
 - the runtime's route or policy allows that scope;
-- the operation has enough parameter schema for safe invocation.
+- the binding supplies enough input schema for safe invocation.
 
-Example:
+The first standardized ACC v1 binding is OpenAPI. It carries the declaration in the operation-level `x-agent-capability` extension. Placement, extraction, parameter resolution, and OpenAPI-specific conformance are defined in [bindings/openapi.md](bindings/openapi.md).
+
+Core declaration example:
 
 ```yaml
-paths:
-  /orders/{id}:
-    get:
-      operationId: order_get
-      summary: Query one order by ID.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      x-agent-capability:
-        version: 1
-        enabled: true
-        scope: order.read
-        risk:
-          level: low
-        subject:
-          required: true
-        execution:
-          readonly: true
-          idempotent: true
+version: 1
+enabled: true
+scope: order.read
+risk:
+  level: low
+subject:
+  required: true
+execution:
+  readonly: true
+  idempotent: true
 ```
 
 ## 4. Field Model
@@ -150,8 +140,10 @@ Risk levels describe the worst reasonable consequence of allowing an agent to in
 
 If omitted, runtimes SHOULD apply safe defaults:
 
-- HTTP `GET` or `execution.readonly: true`: `low`;
-- non-readonly write operations: `medium`.
+- `execution.readonly: true`: `low`;
+- operations not declared readonly: `medium`.
+
+A binding MAY define an additional native signal for the readonly default when that signal has stable semantics in the carrier protocol. The binding MUST document its precedence and conservative fallback.
 
 ### 4.5 `subject`
 
@@ -215,7 +207,7 @@ Approval condition semantics:
 - `approval.required: true` means every invocation creates an approval intent. Conditional rules MUST NOT reduce an unconditional approval requirement.
 - When `approval.required` is false or omitted, `approval.when` uses **ANY** semantics: one matching item is sufficient to create an approval intent.
 - An absent or empty `approval.when` array creates no conditional approval intent.
-- `param` MUST resolve to a parameter declared in the operation's standard OpenAPI `parameters` or `requestBody` JSON Schema.
+- `param` MUST resolve to an input declared by the bound operation. Each binding MUST define deterministic path resolution and map native values to the ACC JSON value model.
 - Runtimes MUST evaluate conditions against JSON values. They MUST NOT coerce strings into numbers or booleans for comparison.
 - `>` / `>=` / `<` / `<=` require a JSON `number` or `integer` parameter and a finite JSON number as `value`.
 - `==`, `!=`, and `in` use strict JSON type-aware equality. For example, `true` is not equal to `"true"`, and `0` is not equal to `"0"`.
@@ -305,10 +297,10 @@ Guidance fields help agents select and call capabilities correctly. They MUST NO
 
 An ACC-compatible runtime SHOULD:
 
-- parse `x-agent-capability` from OpenAPI operations;
+- consume a validated ACC declaration and bound operation artifact from a conforming binding, or implement that binding itself;
 - expose only `enabled: true` operations with a non-empty `scope`;
 - compile the declaration into a runtime tool model;
-- preserve standard OpenAPI parameter schema;
+- preserve the binding-native input schema required for validation;
 - enforce route or policy allowlists using `scope`;
 - apply risk defaults for omitted risk values;
 - hide `subject.required` capabilities when no trusted subject exists;
@@ -324,7 +316,8 @@ An ACC-compatible runtime MUST NOT:
 - treat ACC as final business authorization;
 - allow model-generated text to override scope, risk, subject, approval, or audit decisions;
 - use unknown fields to silently change security behavior;
-- require business parameters to be encoded inside ACC metadata.
+- require business parameters to be encoded inside ACC metadata;
+- reinterpret a core field because a different carrier protocol is used.
 
 ## 6. Compatibility
 
@@ -340,7 +333,7 @@ Ignoring an unknown field provides syntax-level forward compatibility, not autom
 
 The declaration field and the specification release serve different purposes:
 
-- `x-agent-capability.version: 1` identifies the major contract compatibility family;
+- declaration field `version: 1` identifies the major contract compatibility family;
 - repository releases use semantic versions such as `v1.0.2` for an exact published revision of ACC v1;
 - patch and minor releases within `v1.x.x` keep the declaration field at `1`;
-- a breaking contract family would require both an ACC `v2.0.0` specification release and `x-agent-capability.version: 2`.
+- a breaking contract family would require both an ACC `v2.0.0` specification release and declaration field `version: 2`.

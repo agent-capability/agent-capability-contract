@@ -63,14 +63,14 @@ Add a new core field only when:
 - it affects runtime governance;
 - the effect is portable across runtimes;
 - it can be tested by conformance checks;
-- it cannot be expressed cleanly with standard OpenAPI schema;
+- it cannot be expressed cleanly with binding-native standard fields or schemas across the target bindings;
 - it does not require the ACC runtime to understand business-specific authorization logic.
 
 Business-specific metadata should use:
 
-- standard OpenAPI fields where possible;
+- binding-native standard fields where possible;
 - `guidance.context` for lightweight context tags;
-- operation-level `x-business-*` fields for business-defined metadata;
+- binding-specific business metadata, such as OpenAPI operation-level `x-business-*` fields;
 - runtime-specific extension fields for non-portable behavior.
 
 Unknown ACC fields must be ignored by compliant runtimes unless standardized later.

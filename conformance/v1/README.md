@@ -6,7 +6,7 @@ Specification release: 1.0.2
 
 Declaration compatibility family: ACC v1
 
-This directory publishes portable inputs and abstract expected outcomes for ACC v1 parser and runtime profiles.
+This directory publishes portable declaration inputs, core runtime outcomes, and OpenAPI-specific default cases for the ACC v1 OpenAPI Binding Parser and Runtime profiles. Core-only consumers may reuse the vectors whose inputs do not depend on `http_method` or another binding-native signal.
 
 The vectors complement the human checklist in [../README.md](../README.md). They do not prescribe an implementation API, database, queue, approval UI, logging backend, or hash algorithm, and passing them is not official certification.
 

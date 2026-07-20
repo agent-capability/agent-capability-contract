@@ -127,7 +127,7 @@
       "id": "T-APPROVAL-05",
       "profile": "runtime",
       "kind": "approval",
-      "assertion": "An invocation value incompatible with its OpenAPI schema is rejected before condition evaluation.",
+      "assertion": "An invocation value incompatible with its bound input schema is rejected before condition evaluation.",
       "input": {
         "declaration": { "version": 1, "enabled": true, "scope": "refund.create", "approval": { "when": [{ "param": "amount", "op": ">", "value": 1000 }] } },
         "parameter_schema": { "type": "object", "properties": { "amount": { "type": "number" } }, "required": ["amount"] },
@@ -151,7 +151,7 @@
       "id": "T-RISK-01",
       "profile": "runtime",
       "kind": "risk-default",
-      "assertion": "A GET operation defaults to low risk when risk is omitted.",
+      "assertion": "Under the OpenAPI binding, a GET operation defaults to low risk when risk and execution.readonly are omitted.",
       "input": { "declaration": { "version": 1, "enabled": true, "scope": "order.read" }, "http_method": "GET" },
       "expected": { "effective_risk": "low" }
     },

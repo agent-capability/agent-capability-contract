@@ -12,7 +12,7 @@ Describe the proposed portable semantic change in a few sentences.
 
 ## Problem
 
-Explain the problem and why existing ACC fields, standard OpenAPI, bindings, or implementation extensions cannot solve it cleanly.
+Explain the problem and why existing ACC fields, binding-native standard fields, or implementation extensions cannot solve it cleanly.
 
 ## Non-Goals
 

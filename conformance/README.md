@@ -1,12 +1,12 @@
 # ACC Conformance Checklist
 
-This checklist records ACC v1 runtime responsibilities. Before making a compatibility claim, select the applicable Parser, Generator, Runtime, or Policy Component profile in [PROFILES.md](PROFILES.md).
+This checklist records ACC v1 OpenAPI Binding and core runtime responsibilities. Before making a compatibility claim, select the applicable binding Parser, binding Generator, Runtime, or Policy Component profile in [PROFILES.md](PROFILES.md).
 
 Use [SELF_ASSESSMENT.md](SELF_ASSESSMENT.md) to publish evidence and register an implementation. ACC currently uses self-assessment, not official certification.
 
-Parser implementations normally complete the Parser section. Runtime implementations complete every applicable section. Generator and Policy Component requirements are defined in their profiles because they do not own the full runtime lifecycle.
+OpenAPI parser implementations normally complete the Parser section. Runtime implementations complete every applicable section for the bindings they support. Generator and Policy Component requirements are defined in their profiles because they do not own the full runtime lifecycle.
 
-## Parser
+## OpenAPI Binding Parser
 
 - [ ] Reads `x-agent-capability` from OpenAPI operation objects.
 - [ ] Requires `version`, `enabled`, and `scope`.
@@ -31,7 +31,7 @@ Parser implementations normally complete the Parser section. Runtime implementat
 - [ ] Treats `approval.required: true` as unconditional approval intent.
 - [ ] Evaluates `approval.when` with ANY semantics when unconditional approval is not required.
 - [ ] Treats an absent or empty `approval.when` as no conditional approval intent.
-- [ ] Requires every `approval.when.param` to resolve to a declared, typed OpenAPI parameter.
+- [ ] Requires every `approval.when.param` to resolve to a declared, typed input in the bound OpenAPI operation.
 - [ ] Uses strict JSON type-aware comparison for approval conditions; does not coerce strings into numbers or booleans.
 - [ ] Rejects a condition parameter whose invocation value is incompatible with its declared schema before calling the business operation.
 - [ ] Applies `execution.rate_limit` or maps it to runtime limits.
@@ -59,7 +59,7 @@ Machine-readable ACC v1 inputs and abstract expected outcomes are available in [
 Recommended wording:
 
 ```text
-This project implements ACC v1 OpenAPI declarations.
+This project implements the ACC v1 OpenAPI Binding Parser Profile.
 ```
 
 Avoid:

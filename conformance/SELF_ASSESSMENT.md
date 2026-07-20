@@ -26,7 +26,8 @@ Maintainers review whether the submission is complete, accurately scoped, public
 - Maintainer:
 - Assessment date: YYYY-MM-DD
 - ACC version: v1
-- Claimed profile: Parser / Generator / Runtime / Policy Component
+- Claimed profile: Binding Parser / Binding Generator / Runtime / Policy Component
+- Binding and binding version:
 - Implementation version or commit:
 - License:
 
@@ -34,7 +35,7 @@ Maintainers review whether the submission is complete, accurately scoped, public
 
 - Supported ACC fields:
 - Unsupported optional fields:
-- OpenAPI versions:
+- Supported carrier-protocol versions:
 - Runtime or integration assumptions:
 - Conformance corpus release:
 - Applicable vectors passed / skipped:
@@ -43,7 +44,7 @@ Maintainers review whether the submission is complete, accurately scoped, public
 
 | Checklist area | Status | Evidence link | Notes |
 |---|---|---|---|
-| Parser | Pass / Partial / N/A | | |
+| Binding Parser | Pass / Partial / N/A | | |
 | Exposure | Pass / Partial / N/A | | |
 | Governance | Pass / Partial / N/A | | |
 | Authority Boundary | Pass / Partial / N/A | | |

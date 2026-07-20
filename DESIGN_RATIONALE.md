@@ -29,7 +29,7 @@ A field belongs in ACC core only when all of the following are true:
 1. It changes portable agent-facing governance semantics.
 2. Independent parsers or runtimes can implement the same meaning.
 3. The behavior can be tested without one product's private database, UI, identity directory, or workflow engine.
-4. Standard OpenAPI and JSON Schema cannot already express it cleanly.
+4. Standard binding-native protocol and schema mechanisms cannot already express it cleanly across the target bindings.
 5. It does not require the runtime to become the final business authorization authority.
 6. An older compatible runtime can ignore the field without silently reducing security, or the change uses a new major compatibility family.
 
@@ -62,6 +62,7 @@ More fields are not automatically better. A field that cannot pass this test cre
 | Audit retention and legal hold | Retention duration, archive, deletion, and legal hold are organization-wide compliance policies. | Deployment and compliance policy |
 | Field-level audit redaction | ACC v1 declares broad sensitivity. A portable request/response path model, arrays, references, and conservative fallback still need design evidence. | OpenAPI schema annotation, runtime policy, or a future ACC proposal |
 | General Boolean condition groups | ACC v1 intentionally uses bounded ANY conditions. Nested Boolean policy needs precedence, compatibility, and fail-safe semantics. | Runtime policy engine or a future ACC proposal |
+| Detailed effect or business-domain taxonomy | `execution.readonly` already carries the most portable state-change distinction. Destructive, additive, open-world, and domain labels overlap binding-native metadata, may be non-exclusive, and do not yet have stable cross-industry semantics. | Binding-native annotations, authoring diagnostics, implementation extensions, or a future evidence-backed proposal |
 | Approval UI or double confirmation | Some runtimes are headless gateways, queues, or deterministic workflows with no user interface. | Runtime or approval product |
 | Rollback and compensation | Compensation is not necessarily an inverse call; it needs authorization, state, idempotency, and workflow semantics. | Transaction, saga, or workflow layer |
 | Tool composition and ordering | Preconditions, orchestration, and multi-step transactions form a workflow or planning contract. | Workflow or orchestration layer |
@@ -84,6 +85,25 @@ ACC therefore specifies:
 - conformance profiles and observable outcomes.
 
 If the same declaration can be interpreted in contradictory ways by conforming implementations, that is a specification defect and should be corrected. If two organizations intentionally map the same risk classification to different local approval workflows, that is deployment policy, not a portability defect.
+
+### 4.1 Why ACC v1 Uses A Compact Risk Classification
+
+`risk.level` describes the worst reasonable consequence of allowing an agent to initiate an operation automatically. It is a portable classification result, not a claim that every contributing factor can already be standardized.
+
+Candidate factors such as state-change effect, destructive behavior, money movement, permission change, external communication, or business domain may improve authoring diagnostics. They are not automatically suitable core fields:
+
+- one operation may have several effects depending on arguments and current business state;
+- industry domains are overlapping and do not map to one universal risk policy;
+- OpenAPI methods, ACC execution hints, MCP annotations, and future bindings may already carry related metadata with different trust semantics;
+- if a new runtime upgrades `risk.level` from optional factors while an older runtime ignores them, the compatibility fallback may become less safe.
+
+Implementations may experiment with namespaced factors or lint rules. A future proposal must define deterministic behavior, precedence, conservative fallback, and evidence from independent bindings before any factor becomes ACC Core.
+
+### 4.2 Why Guidance Remains In The Capability Contract
+
+An agent-facing capability must be selectable as well as governable. `guidance` carries supplemental model-readable selection context, while remaining explicitly non-authoritative and non-security-critical.
+
+Bindings must reuse their native schema, description, and example mechanisms wherever those mechanisms already express the API accurately. ACC guidance must not replace request or response schemas, contradict binding-native descriptions, or become authorization policy. Each binding defines the mapping and precedence between native descriptive metadata and supplemental ACC guidance.
 
 ## 5. Examples Of The Boundary
 
@@ -138,7 +158,7 @@ Examples:
 A proposal should include:
 
 - the portable problem, with more than one implementation context;
-- why standard OpenAPI or an implementation extension cannot solve it;
+- why binding-native standard fields or an implementation extension cannot solve it;
 - complete field and failure semantics;
 - interaction and precedence with existing fields;
 - backward-compatibility and fail-safe analysis;

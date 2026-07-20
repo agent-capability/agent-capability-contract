@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Defined a common Core/Binding interface covering carrier placement, validated capability artifacts, native input mapping, metadata precedence, failure behavior, and binding-specific conformance.
+- Moved OpenAPI-specific extraction, parameter resolution, `GET` risk fallback, guidance mapping, and Parser Profile responsibilities into the OpenAPI binding.
+- Clarified why detailed effect or business-domain taxonomies remain experimental authoring or binding metadata rather than ACC v1 core fields.
+- Clarified why agent-selection guidance remains in the capability contract while native schemas and descriptions remain authoritative.
+- Added a Draft Proposal for minimal agent-facing capability deprecation without automatic disabling, redirection, or schema changes.
+- No released schema, core field, OpenAPI declaration behavior, or existing conformance outcome changed.
+
 ## 1.0.2 - 2026-07-18
 
 - Added a public normative proposal lifecycle and template.
