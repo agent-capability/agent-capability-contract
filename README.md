@@ -67,7 +67,7 @@ x-agent-capability:
 
 See [SPEC.md](SPEC.md) for the normative core field model, [Binding Requirements](bindings/README.md) for the interface every binding must define, and [OpenAPI Binding](bindings/openapi.md) for the first carrier-specific mapping.
 
-ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.2`; product or runtime versions are separate.
+ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.3`; product or runtime versions are separate.
 
 ## Implement ACC
 
@@ -97,8 +97,9 @@ DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns be
 DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries
 LANDSCAPE.md                  Non-normative map of adjacent protocols and governance layers
 IMPLEMENTATIONS.md            Known implementations and claim language
-RELEASE_NOTES_v1.0.2.md       Current ACC v1 patch release summary
-RELEASE_NOTES_v1.0.1.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.3.md       Current ACC v1 patch release summary
+RELEASE_NOTES_v1.0.2.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.1.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.0.md       Initial stable ACC v1 release summary
 GOVERNANCE.md                 Stewardship, versioning, and extension rules
 CONTRIBUTING.md               Contribution rules for contract changes

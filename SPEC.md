@@ -4,7 +4,7 @@ Status: Stable
 Ecosystem maturity: Early adoption
 Conformance: Self-assessment with machine-readable reference vectors
 Short name: ACC v1
-Specification release: 1.0.2
+Specification release: 1.0.3
 First standardized binding: OpenAPI (`x-agent-capability`)
 
 ## 1. Scope
@@ -334,6 +334,6 @@ Ignoring an unknown field provides syntax-level forward compatibility, not autom
 The declaration field and the specification release serve different purposes:
 
 - declaration field `version: 1` identifies the major contract compatibility family;
-- repository releases use semantic versions such as `v1.0.2` for an exact published revision of ACC v1;
+- repository releases use semantic versions such as `v1.0.3` for an exact published revision of ACC v1;
 - patch and minor releases within `v1.x.x` keep the declaration field at `1`;
 - a breaking contract family would require both an ACC `v2.0.0` specification release and declaration field `version: 2`.

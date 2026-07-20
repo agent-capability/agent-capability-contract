@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.3 - 2026-07-20
+
 - Defined a common Core/Binding interface covering carrier placement, validated capability artifacts, native input mapping, metadata precedence, failure behavior, and binding-specific conformance.
 - Moved OpenAPI-specific extraction, parameter resolution, `GET` risk fallback, guidance mapping, and Parser Profile responsibilities into the OpenAPI binding.
 - Clarified why detailed effect or business-domain taxonomies remain experimental authoring or binding metadata rather than ACC v1 core fields.
