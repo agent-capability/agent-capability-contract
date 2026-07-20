@@ -4,6 +4,8 @@
 
 ## 1.0.3 - 2026-07-20
 
+[Detailed release notes](RELEASE_NOTES_v1.0.3.md)
+
 - Defined a common Core/Binding interface covering carrier placement, validated capability artifacts, native input mapping, metadata precedence, failure behavior, and binding-specific conformance.
 - Moved OpenAPI-specific extraction, parameter resolution, `GET` risk fallback, guidance mapping, and Parser Profile responsibilities into the OpenAPI binding.
 - Clarified why detailed effect or business-domain taxonomies remain experimental authoring or binding metadata rather than ACC v1 core fields.
@@ -12,6 +14,8 @@
 - No released schema, core field, OpenAPI declaration behavior, or existing conformance outcome changed.
 
 ## 1.0.2 - 2026-07-18
+
+[Detailed release notes](RELEASE_NOTES_v1.0.2.md)
 
 - Added a public normative proposal lifecycle and template.
 - Clarified that core-field admission checks are necessary but not sufficient.
@@ -26,6 +30,8 @@
 
 ## 1.0.1 - 2026-07-12
 
+[Detailed release notes](RELEASE_NOTES_v1.0.1.md)
+
 - Clarified that `approval.when` uses ANY semantics when unconditional approval is not required.
 - Clarified that `approval.required: true` remains unconditional and cannot be reduced by conditional rules.
 - Added machine-readable ACC v1 parser and runtime conformance vectors plus a reference oracle.
@@ -35,6 +41,8 @@
 - No existing ACC v1 declaration requires migration.
 
 ## 1.0.0 - 2026-07-11
+
+[Detailed release notes](RELEASE_NOTES_v1.0.0.md)
 
 - Published the stable ACC v1 specification release while keeping declaration compatibility at `x-agent-capability.version: 1`.
 - Clarified typed `approval.when` semantics: condition targets must resolve to declared parameters, comparisons do not coerce JSON types, and incompatible invocation values must be rejected before business execution.
