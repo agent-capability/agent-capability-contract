@@ -103,6 +103,7 @@ RELEASE_NOTES_v1.0.1.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.0.md       Initial stable ACC v1 release summary
 GOVERNANCE.md                 Stewardship, versioning, and extension rules
 CONTRIBUTING.md               Contribution rules for contract changes
+SECURITY.md                   Private vulnerability reporting and security scope
 CHANGELOG.md                  Public changes
 NOTICE                        Attribution notice
 LICENSE                       Apache-2.0 license
@@ -116,6 +117,7 @@ Known implementations are listed alphabetically in [IMPLEMENTATIONS.md](IMPLEMEN
 
 ## License
 
-ACC is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+ACC is licensed under the Apache License 2.0. See [LICENSE](LICENSE). Security
+reports should follow [SECURITY.md](SECURITY.md).
 
 The license allows use, modification, redistribution, and commercial implementation of ACC.
