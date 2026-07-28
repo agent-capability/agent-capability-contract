@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: ACC Order Service Example
+  version: 1.0.0
+paths:
+  /orders/{order_id}:
+    parameters:
+      - $ref: '#/components/parameters/OrderId'
+    get:
+      operationId: getOrder
+      summary: Read one order
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: order.read
+        risk:
+          level: low
+        subject:
+          required: true
+        execution:
+          readonly: true
+          idempotent: true
+      responses:
+        '200':
+          description: Order details
+  /orders:
+    post:
+      operationId: createOrder
+      summary: Create an order
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: order.create
+        risk:
+          level: medium
+        subject:
+          required: true
+        audit:
+          sensitive: true
+        execution:
+          readonly: false
+          idempotent: true
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOrder'
+      responses:
+        '201':
+          description: Order created
+  /refunds:
+    post:
+      operationId: createRefund
+      summary: Create a refund
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: refund.create
+        risk:
+          level: high
+        subject:
+          required: true
+        approval:
+          required: true
+          prompt: Review this refund before execution.
+          when:
+            - param: amount
+              op: '>'
+              value: 1000
+        audit:
+          sensitive: true
+        execution:
+          readonly: false
+          idempotent: true
+      requestBody:
+        $ref: '#/components/requestBodies/CreateRefund'
+      responses:
+        '202':
+          description: Refund accepted for processing
+  /audit-logs:
+    get:
+      operationId: listAuditLogs
+      summary: Internal audit endpoint, not exposed to agents
+      x-agent-capability:
+        version: 1
+        enabled: false
+        scope: audit.read
+        risk:
+          level: low
+        subject:
+          required: true
+        execution:
+          readonly: true
+          idempotent: true
+      responses:
+        '200':
+          description: Audit records
+components:
+  parameters:
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+  requestBodies:
+    CreateOrder:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateOrderInput'
+    CreateRefund:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateRefundInput'
+  schemas:
+    CreateOrderInput:
+      type: object
+      required:
+        - customer_id
+        - items
+      properties:
+        customer_id:
+          type: string
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required:
+              - sku
+              - quantity
+            properties:
+              sku:
+                type: string
+              quantity:
+                type: integer
+                minimum: 1
+    CreateRefundInput:
+      type: object
+      required:
+        - order_id
+        - amount
+        - reason
+      properties:
+        order_id:
+          type: string
+        amount:
+          type: number
+          exclusiveMinimum: 0
+        reason:
+          type: string
+          minLength: 1

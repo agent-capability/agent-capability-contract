@@ -2,7 +2,7 @@
 
 Status: Reference conformance corpus
 
-Specification release: 1.0.3
+Specification release: 1.0.4
 
 Declaration compatibility family: ACC v1
 

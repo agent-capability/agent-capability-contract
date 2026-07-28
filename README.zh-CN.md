@@ -46,6 +46,22 @@ ACC 管 reach：Agent 最多能触达哪些能力。
 业务系统管 authority：这个主体此刻到底能不能做。
 ```
 
+## 5 分钟上手
+
+如果你已经有一份 OpenAPI 文档，可以直接按照
+[5 分钟给现有 OpenAPI 服务加上 ACC](QUICKSTART.zh-CN.md)，添加第一个
+声明、使用 `acc-validate` 作者校验器检查结果，再逐步扩展到仓库内的
+[多操作订单服务示例](examples/openapi-order-service.yaml)。
+
+无需全局安装即可运行已发布的校验器：
+
+```bash
+npx --yes agent-capability-contract@1.0.4 validate ./openapi.yaml
+```
+
+校验器是非规范性的作者辅助工具。它不替代 ACC 规范、完整 OpenAPI
+Linter、业务授权或运行时 Conformance 测试。
+
 ## OpenAPI 绑定
 
 OpenAPI 是 ACC v1 的首个标准化 Binding。它通过 operation 级 `x-agent-capability` 扩展承载 ACC Core 声明：
@@ -65,7 +81,7 @@ x-agent-capability:
 
 规范性核心字段模型见 [SPEC.md](SPEC.md)，所有 Binding 必须遵守的公共接口要求见 [Binding Requirements](bindings/README.md)，首个载体映射见 [OpenAPI Binding](bindings/openapi.md)。
 
-ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.3` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
+ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.4` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
 
 ## 实现 ACC
 
@@ -84,7 +100,12 @@ CONCEPTS.zh-CN.md             核心概念与范围边界中文版
 bindings/README.md            ACC Binding 公共接口要求
 bindings/openapi.md           OpenAPI 扩展绑定说明
 schemas/acc.v1.schema.json    机器可读 JSON Schema
-examples/                     OpenAPI 示例
+QUICKSTART.md                 英文 5 分钟 OpenAPI 编写指南
+QUICKSTART.zh-CN.md           中文 5 分钟 OpenAPI 编写指南
+bin/acc-validate.mjs          ACC OpenAPI 作者校验器 CLI
+lib/openapi-validator.mjs     校验器库与诊断输出
+examples/                     OpenAPI 示例，含一个多操作服务
+test/                         作者校验器与 CLI 测试
 conformance/README.md         实现者兼容性检查清单
 conformance/PROFILES.md       Binding Parser、Binding Generator、Runtime 与策略组件 Profile
 conformance/SELF_ASSESSMENT.md 开放登记与证据模板
@@ -95,8 +116,9 @@ DESIGN_RATIONALE.md           ACC 保持小核心的原因与相邻职责边界
 DESIGN_RATIONALE.zh-CN.md     设计依据与边界中文版
 LANDSCAPE.md                  相邻协议与治理层的非规范性分层说明
 IMPLEMENTATIONS.md            已知实现与声明口径
-RELEASE_NOTES_v1.0.3.md       当前 ACC v1 补丁发布摘要
-RELEASE_NOTES_v1.0.2.md       上一个 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.4.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.3.md       上一个 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.2.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.1.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.0.md       ACC v1 首个稳定规范发布摘要
 GOVERNANCE.md                 维护、版本和扩展规则

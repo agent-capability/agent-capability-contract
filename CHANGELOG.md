@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## 1.0.4 - 2026-07-28
+
+[Detailed release notes](RELEASE_NOTES_v1.0.4.md)
+
+- Added the non-normative `acc-validate` OpenAPI authoring CLI with human and
+  JSON diagnostics, stable exit codes, local-file `$ref` resolution, ACC v1
+  schema checks, and typed `approval.when` input validation.
+- Added English and Chinese five-minute authoring guides.
+- Added a multi-operation order-service example covering readonly access,
+  write operations, conditional approval, audit sensitivity, and explicit
+  disabled exposure.
+- Added package-install smoke coverage and focused validator/CLI tests.
+- No ACC Core field, OpenAPI Binding requirement, declaration compatibility, or
+  conformance profile changed.
+
 ## 1.0.3 - 2026-07-20
 
 [Detailed release notes](RELEASE_NOTES_v1.0.3.md)

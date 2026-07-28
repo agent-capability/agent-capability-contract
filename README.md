@@ -48,6 +48,23 @@ ACC controls reach.
 The business system controls authority.
 ```
 
+## Five-Minute Start
+
+Already have an OpenAPI document? Follow [Add ACC to an Existing OpenAPI
+Service in Five Minutes](QUICKSTART.md) to add one declaration, validate it with
+the `acc-validate` authoring tool, and then expand to the included
+[multi-operation order service](examples/openapi-order-service.yaml).
+
+Run the published validator without installing it globally:
+
+```bash
+npx --yes agent-capability-contract@1.0.4 validate ./openapi.yaml
+```
+
+The validator is a non-normative authoring aid. It does not replace the ACC
+specification, a complete OpenAPI linter, business authorization, or runtime
+conformance testing.
+
 ## OpenAPI Binding
 
 OpenAPI is the first standardized ACC binding. It carries the ACC Core declaration in the operation-level `x-agent-capability` extension:
@@ -67,7 +84,7 @@ x-agent-capability:
 
 See [SPEC.md](SPEC.md) for the normative core field model, [Binding Requirements](bindings/README.md) for the interface every binding must define, and [OpenAPI Binding](bindings/openapi.md) for the first carrier-specific mapping.
 
-ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.3`; product or runtime versions are separate.
+ACC v1 declarations use `version: 1`. Exact specification revisions use repository tags such as `v1.0.4`; product or runtime versions are separate.
 
 ## Implement ACC
 
@@ -86,7 +103,12 @@ CONCEPTS.zh-CN.md             Chinese translation of core concepts and scope bou
 bindings/README.md            Common requirements for ACC bindings
 bindings/openapi.md           OpenAPI extension binding
 schemas/acc.v1.schema.json    Machine-readable JSON Schema
-examples/                     OpenAPI examples
+QUICKSTART.md                 Five-minute OpenAPI authoring guide
+QUICKSTART.zh-CN.md           Chinese five-minute authoring guide
+bin/acc-validate.mjs          ACC OpenAPI authoring validator CLI
+lib/openapi-validator.mjs     Validator library and diagnostics
+examples/                     OpenAPI examples, including a multi-operation service
+test/                         Authoring validator and CLI tests
 conformance/README.md         Implementation conformance checklist
 conformance/PROFILES.md       Parser, generator, runtime, and policy profiles
 conformance/SELF_ASSESSMENT.md Open registration and evidence template
@@ -97,8 +119,9 @@ DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns be
 DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries
 LANDSCAPE.md                  Non-normative map of adjacent protocols and governance layers
 IMPLEMENTATIONS.md            Known implementations and claim language
-RELEASE_NOTES_v1.0.3.md       Current ACC v1 patch release summary
-RELEASE_NOTES_v1.0.2.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.4.md       Current ACC v1 patch release summary
+RELEASE_NOTES_v1.0.3.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.2.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.1.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.0.md       Initial stable ACC v1 release summary
 GOVERNANCE.md                 Stewardship, versioning, and extension rules
