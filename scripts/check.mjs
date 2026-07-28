@@ -25,6 +25,7 @@ const packageJson = readJson('package.json');
 const schema = readJson('schemas/acc.v1.schema.json');
 const spec = readFileSync(join(root, 'SPEC.md'), 'utf8');
 const changelog = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
+const validatorPath = join(root, 'bin/acc-validate.mjs');
 
 const release = String(packageJson?.version || '');
 const major = Number(release.split('.')[0]);
@@ -48,6 +49,28 @@ if (!existsSync(join(root, `RELEASE_NOTES_v${release}.md`))) {
 
 if (!changelog.includes(`## ${release} -`)) {
   failures.push(`CHANGELOG.md: current release ${release} is missing`);
+}
+
+if (packageJson?.bin?.['acc-validate'] !== 'bin/acc-validate.mjs') {
+  failures.push('package.json: acc-validate binary entry is missing or incorrect');
+}
+
+if (!existsSync(validatorPath)) {
+  failures.push('bin/acc-validate.mjs: authoring validator CLI is missing');
+} else if ((statSync(validatorPath).mode & 0o111) === 0) {
+  failures.push('bin/acc-validate.mjs: authoring validator CLI must be executable');
+}
+
+for (const requiredPackageFile of [
+  'lib/',
+  'schemas/acc.v1.schema.json',
+  'examples/openapi-order-service.yaml',
+  'QUICKSTART.md',
+  'QUICKSTART.zh-CN.md',
+]) {
+  if (!packageJson?.files?.includes(requiredPackageFile)) {
+    failures.push(`package.json: npm package files must include ${requiredPackageFile}`);
+  }
 }
 
 const markdownFiles = walk(root).filter((path) => extname(path) === '.md');

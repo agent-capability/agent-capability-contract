@@ -1,6 +1,6 @@
 {
   "name": "agent-capability-contract",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "description": "ACC is the capability declaration contract for A2B, Agent-to-Business.",
   "license": "Apache-2.0",
@@ -8,6 +8,20 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/agent-capability/agent-capability-contract.git"
+  },
+  "bin": {
+    "acc-validate": "bin/acc-validate.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "schemas/acc.v1.schema.json",
+    "examples/openapi-order-service.yaml",
+    "QUICKSTART.md",
+    "QUICKSTART.zh-CN.md"
+  ],
+  "engines": {
+    "node": ">=20"
   },
   "keywords": [
     "acc",
@@ -21,10 +35,13 @@
     "ai-agents"
   ],
   "scripts": {
-    "check": "node scripts/check.mjs && node scripts/check-conformance.mjs",
-    "conformance:check": "node scripts/check-conformance.mjs"
+    "check": "node scripts/check.mjs && node scripts/check-conformance.mjs && node --test",
+    "conformance:check": "node scripts/check-conformance.mjs",
+    "test": "node --test",
+    "validate:example": "node bin/acc-validate.mjs examples/openapi-order-service.yaml"
   },
-  "devDependencies": {
-    "ajv": "^8.17.1"
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "yaml": "^2.9.0"
   }
 }
