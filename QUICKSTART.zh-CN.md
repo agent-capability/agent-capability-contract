@@ -11,13 +11,13 @@
 无需全局安装即可运行已发布的校验器：
 
 ```bash
-npx --yes agent-capability-contract@1.0.4 validate ./openapi.yaml
+npx --yes agent-capability-contract@1.0.5 validate ./openapi.yaml
 ```
 
 也可以把校验器添加为项目开发依赖：
 
 ```bash
-npm install --save-dev agent-capability-contract@1.0.4
+npm install --save-dev agent-capability-contract@1.0.5
 ```
 
 该包要求使用 Node.js 20 或更高版本。

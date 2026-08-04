@@ -92,6 +92,22 @@ Before a capability becomes visible to an agent or caller:
 
 For approval evaluation, `approval.required: true` is unconditional. Otherwise, `approval.when` uses ANY semantics: the first or any matching condition is sufficient to create an approval intent. Implementations may evaluate every condition for diagnostics, but a non-matching condition cannot cancel another matching condition.
 
+### Per-Invocation Conditions Do Not Limit Cumulative Effects
+
+`approval.when` evaluates one invocation at a time. Consider a refund operation with this condition:
+
+```yaml
+approval:
+  when:
+    - param: amount
+      op: ">"
+      value: 1000
+```
+
+The condition creates approval intent for one refund above 1000. It does not prevent an agent from proposing 60 separate refunds of 999, and it does not calculate a customer's daily, tenant-wide, or rolling-window total.
+
+Do not represent cumulative fraud controls, velocity limits, account balances, or other stateful business invariants as if a per-invocation ACC condition enforced them. Keep those controls in the authoritative business or policy layer, evaluate them against current state, and let that layer reject or escalate the operation even when the individual ACC condition does not match.
+
 ACC does not standardize a route object. A runtime may use routes, products, tenants, scenarios, or static policies as its exposure context, provided its matching behavior is documented.
 
 ## 6. Invocation Lifecycle

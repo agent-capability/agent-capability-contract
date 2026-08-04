@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 1.0.5 - 2026-08-04
+
+[Detailed release notes](RELEASE_NOTES_v1.0.5.md)
+
+- Clarified that `approval.when` evaluates one invocation and cannot enforce
+  aggregate, rolling-window, cross-invocation, or sequence constraints.
+- Defined portable `in`, `contains`, and `exists` runtime semantics, including
+  strict JSON equality and explicit-null behavior.
+- Expanded the ACC v1 conformance corpus from 18 to 26 vectors with focused
+  operator coverage.
+- Added continuous integration for repository, conformance, and test checks.
+- Added no ACC Core field and required no declaration migration.
+
 ## 1.0.4 - 2026-07-28
 
 [Detailed release notes](RELEASE_NOTES_v1.0.4.md)

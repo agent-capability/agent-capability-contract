@@ -161,6 +161,68 @@ ${declaration(`        approval:
   );
 });
 
+test('requires an array comparison value for the in operator', async () => {
+  const { file } = await writeFixture(`openapi: 3.1.0
+paths:
+  /cases:
+    post:
+${declaration(`        approval:
+          when:
+            - param: team
+              op: in
+              value: finance
+`)}      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: string
+      responses:
+        '202':
+          description: accepted
+`);
+  const report = await validateOpenApiFile(file);
+
+  assert.equal(report.valid, false);
+  assert.ok(
+    report.diagnostics.some((item) => item.code === 'approval_condition_value_invalid'),
+  );
+});
+
+test('requires a string comparison value for string contains', async () => {
+  const { file } = await writeFixture(`openapi: 3.1.0
+paths:
+  /messages:
+    post:
+${declaration(`        approval:
+          when:
+            - param: message
+              op: contains
+              value: 1
+`)}      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      responses:
+        '202':
+          description: accepted
+`);
+  const report = await validateOpenApiFile(file);
+
+  assert.equal(report.valid, false);
+  assert.ok(
+    report.diagnostics.some(
+      (item) => item.code === 'approval_condition_value_type_mismatch',
+    ),
+  );
+});
+
 test('resolves local file references', async () => {
   const { directory, file } = await writeFixture(`openapi: 3.1.0
 paths:

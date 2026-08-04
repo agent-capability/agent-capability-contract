@@ -4,7 +4,7 @@ Status: Stable
 Ecosystem maturity: Early adoption
 Conformance: Self-assessment with machine-readable reference vectors
 Short name: ACC v1
-Specification release: 1.0.4
+Specification release: 1.0.5
 First standardized binding: OpenAPI (`x-agent-capability`)
 
 ## 1. Scope
@@ -210,9 +210,13 @@ Approval condition semantics:
 - `param` MUST resolve to an input declared by the bound operation. Each binding MUST define deterministic path resolution and map native values to the ACC JSON value model.
 - Runtimes MUST evaluate conditions against JSON values. They MUST NOT coerce strings into numbers or booleans for comparison.
 - `>` / `>=` / `<` / `<=` require a JSON `number` or `integer` parameter and a finite JSON number as `value`.
-- `==`, `!=`, and `in` use strict JSON type-aware equality. For example, `true` is not equal to `"true"`, and `0` is not equal to `"0"`.
-- `contains` applies only to string or array parameters. String containment requires a string `value`; array containment uses strict JSON equality for elements.
+- `==` and `!=` use strict JSON type-aware equality. For example, `true` is not equal to `"true"`, and `0` is not equal to `"0"`.
+- `in` requires `value` to be a JSON array and matches when the parameter is strictly JSON-equal to one array member.
+- `contains` applies only to string or array parameters. String containment requires a string `value` and uses substring matching; array containment uses strict JSON equality for elements.
+- `exists` matches only when `param` resolves in the invocation input and its value is not JSON `null`. A missing path and an explicit JSON `null` therefore do not match.
 - If an invocation supplies a value whose JSON type is incompatible with the condition parameter schema, the runtime MUST reject the invocation before it reaches the business operation. It MUST NOT silently treat the condition as unmatched.
+
+`approval.when` conditions are evaluated independently for each invocation. They do not express aggregate, rolling-window, cross-invocation, or sequence constraints. For example, `amount > 1000` does not prevent an agent from proposing multiple smaller operations whose cumulative effect exceeds 1000. Deployments whose risk model includes cumulative effects MUST enforce those constraints in the authoritative business or policy layer. They MUST NOT treat a per-invocation condition as an aggregate limit.
 
 ACC declares approval intent. It does not define who approves, where approval occurs, or how the business workflow is completed.
 
@@ -334,6 +338,6 @@ Ignoring an unknown field provides syntax-level forward compatibility, not autom
 The declaration field and the specification release serve different purposes:
 
 - declaration field `version: 1` identifies the major contract compatibility family;
-- repository releases use semantic versions such as `v1.0.4` for an exact published revision of ACC v1;
+- repository releases use semantic versions such as `v1.0.5` for an exact published revision of ACC v1;
 - patch and minor releases within `v1.x.x` keep the declaration field at `1`;
 - a breaking contract family would require both an ACC `v2.0.0` specification release and declaration field `version: 2`.
