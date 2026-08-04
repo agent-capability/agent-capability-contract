@@ -56,7 +56,7 @@ ACC 管 reach：Agent 最多能触达哪些能力。
 无需全局安装即可运行已发布的校验器：
 
 ```bash
-npx --yes agent-capability-contract@1.0.4 validate ./openapi.yaml
+npx --yes agent-capability-contract@1.0.5 validate ./openapi.yaml
 ```
 
 校验器是非规范性的作者辅助工具。它不替代 ACC 规范、完整 OpenAPI
@@ -81,7 +81,7 @@ x-agent-capability:
 
 规范性核心字段模型见 [SPEC.md](SPEC.md)，所有 Binding 必须遵守的公共接口要求见 [Binding Requirements](bindings/README.md)，首个载体映射见 [OpenAPI Binding](bindings/openapi.md)。
 
-ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.4` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
+ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.5` 这类 Tag 标记准确发布修订。产品和运行时版本与 ACC 规范版本完全独立。
 
 ## 实现 ACC
 
@@ -116,8 +116,9 @@ DESIGN_RATIONALE.md           ACC 保持小核心的原因与相邻职责边界
 DESIGN_RATIONALE.zh-CN.md     设计依据与边界中文版
 LANDSCAPE.md                  相邻协议与治理层的非规范性分层说明
 IMPLEMENTATIONS.md            已知实现与声明口径
-RELEASE_NOTES_v1.0.4.md       当前 ACC v1 补丁发布摘要
-RELEASE_NOTES_v1.0.3.md       上一个 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.5.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.4.md       上一个 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.3.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.2.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.1.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.0.md       ACC v1 首个稳定规范发布摘要

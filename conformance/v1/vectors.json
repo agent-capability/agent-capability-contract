@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "acc_version": 1,
-  "specification_release": "1.0.4",
+  "specification_release": "1.0.5",
   "vectors": [
     {
       "id": "T-PARSE-01",
@@ -144,6 +144,102 @@
         "declaration": { "version": 1, "enabled": true, "scope": "refund.create", "approval": { "when": [] } },
         "parameter_schema": { "type": "object", "properties": { "amount": { "type": "number" } } },
         "args": { "amount": 1500 }
+      },
+      "expected": { "decision": "allow" }
+    },
+    {
+      "id": "T-APPROVAL-07",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The in operator matches a parameter that is strictly JSON-equal to one array member.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "case.assign", "approval": { "when": [{ "param": "team", "op": "in", "value": ["support", "finance"] }] } },
+        "parameter_schema": { "type": "object", "properties": { "team": { "type": "string" } }, "required": ["team"] },
+        "args": { "team": "finance" }
+      },
+      "expected": { "decision": "approval_required" }
+    },
+    {
+      "id": "T-APPROVAL-08",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The in operator does not coerce a JSON number into a string.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "case.assign", "approval": { "when": [{ "param": "code", "op": "in", "value": ["1", "2"] }] } },
+        "parameter_schema": { "type": "object", "properties": { "code": { "type": ["number", "string"] } }, "required": ["code"] },
+        "args": { "code": 1 }
+      },
+      "expected": { "decision": "allow" }
+    },
+    {
+      "id": "T-APPROVAL-09",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The contains operator uses substring matching for a string parameter and string value.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "message.send", "approval": { "when": [{ "param": "message", "op": "contains", "value": "secret" }] } },
+        "parameter_schema": { "type": "object", "properties": { "message": { "type": "string" } }, "required": ["message"] },
+        "args": { "message": "contains secret material" }
+      },
+      "expected": { "decision": "approval_required" }
+    },
+    {
+      "id": "T-APPROVAL-10",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The contains operator uses strict JSON equality for members of an array parameter.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "role.update", "approval": { "when": [{ "param": "roles", "op": "contains", "value": { "name": "admin", "active": true } }] } },
+        "parameter_schema": { "type": "object", "properties": { "roles": { "type": "array", "items": { "type": "object" } } }, "required": ["roles"] },
+        "args": { "roles": [{ "active": true, "name": "admin" }] }
+      },
+      "expected": { "decision": "approval_required" }
+    },
+    {
+      "id": "T-APPROVAL-11",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "Array containment does not coerce a JSON number element into a string.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "tag.update", "approval": { "when": [{ "param": "tags", "op": "contains", "value": "1" }] } },
+        "parameter_schema": { "type": "object", "properties": { "tags": { "type": "array", "items": { "type": ["number", "string"] } } }, "required": ["tags"] },
+        "args": { "tags": [1] }
+      },
+      "expected": { "decision": "allow" }
+    },
+    {
+      "id": "T-APPROVAL-12",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The exists operator matches a path that resolves to a non-null JSON value.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "order.update", "approval": { "when": [{ "param": "reason", "op": "exists" }] } },
+        "parameter_schema": { "type": "object", "properties": { "reason": { "type": "string" } } },
+        "args": { "reason": "manual override" }
+      },
+      "expected": { "decision": "approval_required" }
+    },
+    {
+      "id": "T-APPROVAL-13",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The exists operator does not match a path that is absent from the invocation input.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "order.update", "approval": { "when": [{ "param": "reason", "op": "exists" }] } },
+        "parameter_schema": { "type": "object", "properties": { "reason": { "type": "string" } } },
+        "args": {}
+      },
+      "expected": { "decision": "allow" }
+    },
+    {
+      "id": "T-APPROVAL-14",
+      "profile": "runtime",
+      "kind": "approval",
+      "assertion": "The exists operator does not match an explicit JSON null value.",
+      "input": {
+        "declaration": { "version": 1, "enabled": true, "scope": "order.update", "approval": { "when": [{ "param": "reason", "op": "exists" }] } },
+        "parameter_schema": { "type": "object", "properties": { "reason": { "type": ["string", "null"] } }, "required": ["reason"] },
+        "args": { "reason": null }
       },
       "expected": { "decision": "allow" }
     },

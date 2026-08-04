@@ -11,13 +11,13 @@ binding remain authoritative.
 Run the published validator without installing it globally:
 
 ```bash
-npx --yes agent-capability-contract@1.0.4 validate ./openapi.yaml
+npx --yes agent-capability-contract@1.0.5 validate ./openapi.yaml
 ```
 
 Or add the validator to a project:
 
 ```bash
-npm install --save-dev agent-capability-contract@1.0.4
+npm install --save-dev agent-capability-contract@1.0.5
 ```
 
 The package requires Node.js 20 or later.
