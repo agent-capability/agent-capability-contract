@@ -49,7 +49,7 @@ Status: Non-normative coverage index（非规范性覆盖索引）
 | `T-RISK-02` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | 非只读写操作省略风险时默认中风险。 | `effective_risk="medium"` | Binding 映射及有效策略保留 | Not run |
 | `T-AUDIT-01` | §4.7 | 保留 audit.sensitive 为 true 的提示。 | `audit_sensitive=true` | 提示传递；另外验证脱敏持久化 | Not run |
 
-库存：声明 5、暴露 4、审批 14、风险默认值 2、审计提示 1，共 **26** 项。
+向量统计：声明 5、暴露 4、审批 14、风险默认值 2、审计提示 1，共 **26** 项。
 
 ## 语料没有证明的部分
 
