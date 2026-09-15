@@ -29,6 +29,7 @@ Maintainers review whether the submission is complete, accurately scoped, public
 - Claimed profile: Binding Parser / Binding Generator / Runtime / Policy Component
 - Binding and binding version:
 - Implementation version or commit:
+- Distributed package SHA-256, if applicable:
 - License:
 
 ## Supported Surface
@@ -38,18 +39,26 @@ Maintainers review whether the submission is complete, accurately scoped, public
 - Supported carrier-protocol versions:
 - Runtime or integration assumptions:
 - Conformance corpus release:
-- Applicable vectors passed / skipped:
+- Conformance corpus commit or SHA-256:
+- Public interface / adapter entrypoint and command:
+- Applicable vectors passed / failed / skipped / not run:
+- Per-skip reason (not applicable versus applicable but unsupported):
 
 ## Conformance Evidence
 
 | Checklist area | Status | Evidence link | Notes |
 |---|---|---|---|
-| Binding Parser | Pass / Partial / N/A | | |
-| Exposure | Pass / Partial / N/A | | |
-| Governance | Pass / Partial / N/A | | |
-| Authority Boundary | Pass / Partial / N/A | | |
-| Traceability | Pass / Partial / N/A | | |
-| Machine-readable vectors | Pass / Partial / N/A | | |
+| Binding Parser | Pass / Partial / Fail / Not run / N/A | | |
+| Exposure | Pass / Partial / Fail / Not run / N/A | | |
+| Governance | Pass / Partial / Fail / Not run / N/A | | |
+| Authority Boundary | Pass / Partial / Fail / Not run / N/A | | |
+| Traceability | Pass / Partial / Fail / Not run / N/A | | |
+| Machine-readable vectors via implementation adapter | Pass / Partial / Fail / Not run / N/A | | |
+
+## Corpus Maintenance Check (Separate From Implementation Evidence)
+
+- Reference oracle command/date/result, if run:
+- This result checks corpus consistency; it does not execute the claimed implementation.
 
 ## Known Limitations
 
@@ -61,6 +70,8 @@ This is a self-assessment by the project maintainers. It does not claim official
 ```
 
 ## 3. Registry Entry Template
+
+Use [the coverage index](v1/COVERAGE.md) to separate abstract vector outcomes from integration evidence. Record `Not run` when an applicable interface was not exercised; do not count reference-oracle success as a runtime pass. A claimed `N/A` needs a profile or scope reason, and unsupported applicable behavior needs an explicit limitation.
 
 Add one row to the alphabetically ordered table in `IMPLEMENTATIONS.md`:
 

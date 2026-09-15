@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: ACC Catalog Service Example
+  version: 1.0.0
+  description: >-
+    Synthetic contract for a single-tenant catalog. Risk and approval choices
+    assume the business policy described in BUSINESS_RISK_EXAMPLES.md.
+    This document does not implement the service or grant access to products.
+paths:
+  /products/{product_id}/draft:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    patch:
+      operationId: editProductDraft
+      summary: Edit the description and picture URLs of one unpublished draft
+      description: >-
+        The server checks tenant ownership, draft state, editable fields, URL
+        policy, and expected_version. It rejects published products and stale
+        versions. It does not fetch URLs merely because they pass URI syntax.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: catalog.product.draft.edit
+        risk:
+          level: medium
+        subject:
+          required: true
+        execution:
+          readonly: false
+          idempotent: false
+        audit:
+          sensitive: true
+        guidance:
+          when_to_use: Edit the text or images of one unpublished draft; this operation cannot change price or stock.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [expected_version]
+              minProperties: 2
+              properties:
+                expected_version:
+                  type: integer
+                  minimum: 1
+                description:
+                  type: string
+                  maxLength: 5000
+                image_urls:
+                  type: array
+                  minItems: 1
+                  maxItems: 8
+                  items:
+                    type: string
+                    format: uri
+      responses:
+        '200':
+          description: Draft updated; returns the new version
+        '403':
+          description: Subject cannot edit this product
+        '409':
+          description: Product is not a draft or expected_version is stale
+  /products/{product_id}/publication:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    post:
+      operationId: publishProduct
+      summary: Publish one reviewed product draft
+      description: >-
+        The server verifies ownership, approver authority, channel eligibility,
+        product completeness, current draft state, and expected_version.
+        Taking a product offline later does not undo views or purchases.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: catalog.product.publish
+        risk:
+          level: high
+        subject:
+          required: true
+        approval:
+          required: true
+          prompt: Review the product, channel, and draft version before publishing.
+        execution:
+          readonly: false
+          idempotent: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [channel, expected_version]
+              properties:
+                channel:
+                  type: string
+                  enum: [web, mobile]
+                expected_version:
+                  type: integer
+                  minimum: 1
+      responses:
+        '200':
+          description: Product published
+        '403':
+          description: Publication is not authorized or approved
+        '409':
+          description: Current state or version prevents publication
+  /products/{product_id}/price:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    patch:
+      operationId: changeProductPrice
+      summary: Set the unit price of one product
+      description: >-
+        price_minor is an integer in the catalog's fixed currency minor unit.
+        The server calculates reductions from its current price and enforces
+        margin, discount, ownership, and concurrency rules independently of
+        the illustrative absolute-price approval condition.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: catalog.product.price.edit
+        risk:
+          level: high
+        subject:
+          required: true
+        approval:
+          required: false
+          when:
+            - param: price_minor
+              op: '>'
+              value: 100000
+              label: Proposed unit price exceeds this example's review threshold.
+        execution:
+          readonly: false
+          idempotent: false
+        audit:
+          sensitive: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [price_minor, expected_version]
+              properties:
+                price_minor:
+                  type: integer
+                  minimum: 1
+                  maximum: 100000000
+                expected_version:
+                  type: integer
+                  minimum: 1
+      responses:
+        '200':
+          description: Price updated; returns the new version
+        '403':
+          description: Subject, approval, margin, or discount policy rejects the change
+        '409':
+          description: expected_version is stale
+components:
+  parameters:
+    ProductId:
+      name: product_id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1

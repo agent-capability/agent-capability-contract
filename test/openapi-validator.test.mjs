@@ -34,6 +34,19 @@ test('validates the multi-operation order service example', async () => {
   assert.equal(report.errors, 0);
 });
 
+for (const [file, operationCount] of [
+  ['openapi-catalog-service.yaml', 3],
+  ['openapi-inventory-service.yaml', 2],
+]) {
+  test(`validates the business governance example ${file}`, async () => {
+    const report = await validateOpenApiFile(resolve(root, 'examples', file));
+    assert.equal(report.valid, true);
+    assert.equal(report.operations, operationCount);
+    assert.equal(report.acc_declarations, operationCount);
+    assert.equal(report.errors, 0);
+  });
+}
+
 test('rejects an invalid ACC declaration', async () => {
   const { file } = await writeFixture(`openapi: 3.1.0
 paths:

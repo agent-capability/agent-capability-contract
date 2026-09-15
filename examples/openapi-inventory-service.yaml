@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: ACC Inventory Service Example
+  version: 1.0.0
+  description: >-
+    Synthetic contract for warehouse inventory. Risk and approval choices
+    assume the business policy described in BUSINESS_RISK_EXAMPLES.md.
+    Product and warehouse identifiers are interpreted only by this service.
+paths:
+  /warehouses/{warehouse_id}/stock/{sku}:
+    parameters:
+      - $ref: '#/components/parameters/WarehouseId'
+      - $ref: '#/components/parameters/Sku'
+    get:
+      operationId: getStock
+      summary: Read stock for one SKU in one authorized warehouse
+      description: The server checks tenant and warehouse access; readonly does not allow unrestricted inventory enumeration.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: inventory.stock.read
+        risk:
+          level: low
+        subject:
+          required: true
+        execution:
+          readonly: true
+          idempotent: true
+        audit:
+          sensitive: true
+      responses:
+        '200':
+          description: Current stock and version; values may change between reads
+        '403':
+          description: Subject cannot access this warehouse
+    post:
+      operationId: adjustStock
+      summary: Adjust stock for one SKU in one warehouse
+      description: >-
+        The server enforces approver authority, ownership, expected_version,
+        reserved-stock and nonnegative-stock invariants. Repeating delta is
+        not safe; after an uncertain response reconcile the original operation.
+      x-agent-capability:
+        version: 1
+        enabled: true
+        scope: inventory.stock.adjust
+        risk:
+          level: high
+        subject:
+          required: true
+        approval:
+          required: true
+          prompt: Review the warehouse, SKU, stock change, and reason.
+          when:
+            - param: delta
+              op: '>'
+              value: 100
+              label: Large positive adjustment; approval is still required for smaller changes.
+            - param: delta
+              op: '<'
+              value: -100
+              label: Large negative adjustment; approval is still required for smaller changes.
+        execution:
+          readonly: false
+          idempotent: false
+        audit:
+          sensitive: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [delta, reason, expected_version]
+              properties:
+                delta:
+                  type: integer
+                  minimum: -10000
+                  maximum: 10000
+                  not:
+                    const: 0
+                reason:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                expected_version:
+                  type: integer
+                  minimum: 1
+      responses:
+        '200':
+          description: Stock adjusted; returns the new version
+        '403':
+          description: Subject or approval policy rejects the adjustment
+        '409':
+          description: Stale version or stock invariant prevents adjustment
+components:
+  parameters:
+    WarehouseId:
+      name: warehouse_id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    Sku:
+      name: sku
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1

@@ -15,6 +15,7 @@ The vectors complement the human checklist in [../README.md](../README.md). They
 - `vectors.schema.json`: schema for the corpus format.
 - `vectors.json`: versioned parser and runtime cases.
 - `../../scripts/check-conformance.mjs`: reference oracle used to verify that the corpus is internally consistent.
+- [Coverage and implementation evidence](COVERAGE.md) ([中文](COVERAGE.zh-CN.md)): all 26 vector IDs, their limits, and the integration evidence they do not replace.
 
 ## Abstract Kinds
 
