@@ -79,6 +79,8 @@ A runtime should keep the original operation identity and source location so dia
 
 For the OpenAPI binding, steps 1 and 3 mean locating operation-level `x-agent-capability` and resolving standard OpenAPI `parameters` plus `requestBody` schemas. Other bindings must define equivalent extraction and mapping under [Binding Requirements](bindings/README.md).
 
+**Recommended:** validate publisher authority separately from schema validity. Keep the trusted publisher, binding-qualified operation identity, input-schema revision, and change review together. A digest detects different bytes; it does not authenticate the publisher. See [Safety Governance Responsibilities](SAFETY_GOVERNANCE_GUIDE.md#2-keep-source-data-and-authority-separate) for the ingestion and cache lifecycle boundary.
+
 ## 5. Exposure Lifecycle
 
 Before a capability becomes visible to an agent or caller:
@@ -205,6 +207,17 @@ These are specification-derived invariants, not claims about how often a particu
 | Unsupported versions are visible. | A runtime silently interprets a newer declaration using older semantics. | Reject or skip it with diagnostics. |
 
 Implementation-specific incidents may be contributed as clearly labeled examples. A single product's internal failure should not be generalized into normative ACC behavior without portable semantics and conformance evidence.
+
+**Recommended input separation:**
+
+| Input | Use | Boundary |
+|---|---|---|
+| Authenticated publisher's governance declaration | Compile validated ACC semantics | Valid schema alone does not establish source trust. |
+| Tool name, object display name, description, or guidance | Select and understand a capability | Do not derive identity, authorization, or approval from display text. |
+| Tool result, retrieved document, or file content | Interpret business data | Embedded instructions do not change governance. |
+| Changed schema/declaration or cached tool | Review changes or reuse valid artifacts | Preserve reviewed arguments and revalidate current target/policy; cache presence is not authorization. |
+
+The [governance responsibility map](SAFETY_GOVERNANCE_GUIDE.md#3-responsibility-and-evidence-map) separates these ACC boundaries from task budgets, host isolation, lifecycle controls, and deployment evidence.
 
 ## 9. Conformance Mapping
 

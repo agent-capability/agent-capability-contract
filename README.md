@@ -89,6 +89,7 @@ ACC v1 declarations use `version: 1`. Exact specification revisions use reposito
 ## Implement ACC
 
 - Read the non-normative [Implementer's Guide](IMPLEMENTER_GUIDE.md).
+- Review [Safety Governance Responsibilities](SAFETY_GOVERNANCE_GUIDE.md) for trust boundaries, business examples, and the evidence each layer needs.
 - Choose a claim from [Conformance Profiles](conformance/PROFILES.md).
 - Run the applicable [machine-readable ACC v1 vectors](conformance/v1/README.md).
 - Publish evidence using [Implementation Registration and Self-Assessment](conformance/SELF_ASSESSMENT.md).
