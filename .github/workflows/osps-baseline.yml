@@ -1,0 +1,38 @@
+name: OSPS Baseline evaluation
+on:
+  schedule:
+    - cron: '20 3 * * 1'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: osps-baseline-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-10-10
+        with:
+          persist-credentials: false
+      - name: Evaluate OSPS Baseline 2026-08
+        uses: revanite-io/osps-baseline-action@1af7ff8b44af83f120b20cc5f63b877286849257 # v1.5.2
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          token: ${{ github.token }}
+          catalog: osps-baseline-2026-08
+          output-format: json
+          upload-sarif: 'false'
+          fail-on-error: 'false'
+      - name: Retain assessment output
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, verified 2026-10-10
+        with:
+          name: osps-baseline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evaluation_results/
+          if-no-files-found: error
+          retention-days: 14
