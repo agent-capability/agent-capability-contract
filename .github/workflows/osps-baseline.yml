@@ -53,7 +53,7 @@ jobs:
         run: python3 scripts/osps-results.py evaluation_results/pvtr/pvtr.json
       - name: Retain assessment output
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, verified 2026-10-10
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v4, verified 2026-10-10
         with:
           name: osps-baseline-${{ github.run_id }}-${{ github.run_attempt }}
           path: evaluation_results/
