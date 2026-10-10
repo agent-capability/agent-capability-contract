@@ -43,6 +43,10 @@ For schema or normative behavior:
 
 Submitting a proposal does not place it on the roadmap. Proposal authors may provide a self-assessment, but status is recorded through public governance review with rationale.
 
+## Automation-assisted Contributions
+
+Automation-assisted pull requests are welcome when an accountable human submitter reviews the complete change, explains its purpose, provides relevant validation, and follows the same contribution and security requirements as other contributions. Automation does not replace normative review or create an exception to ACC governance.
+
 ## Neutrality Review
 
 Every contract, guidance, example, conformance, and registry change should answer:

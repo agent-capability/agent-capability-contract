@@ -13,6 +13,16 @@ The long-term goal is to keep ACC implementation-neutral:
 - Any compatible runtime may implement ACC independently.
 - The ACC specification should not depend on any implementation's internal database tables, UI concepts, or deployment model.
 
+## Current Repository Responsibility
+
+Jingchuan Nie ([@niejingchuan](https://github.com/niejingchuan)) is the current repository administrator and maintainer for [agent-capability/agent-capability-contract](https://github.com/agent-capability/agent-capability-contract). Repository administration includes configuration of repository access, branch and workflow settings, and maintenance of the project's contribution and security-reporting processes.
+
+Proposed changes should follow [CONTRIBUTING.md](CONTRIBUTING.md). Security-sensitive findings should use the private reporting channel in [SECURITY.md](SECURITY.md). Maintainers review changes for the project's scope and compatibility before acceptance.
+
+The repository member list should be reviewed when maintainers or sensitive-resource access change. Maintainers should record a role's scope before granting elevated access and remove access that is no longer required.
+
+Normative decisions continue to follow this governance document and the public proposal process. Repository administration does not give an implementation privileged semantics or replace contract review.
+
 ## Maintainer Neutrality Invariants
 
 ACC is an independent standard. It is not a subproject, configuration format, sales surface, or compatibility layer owned by any product implementation.

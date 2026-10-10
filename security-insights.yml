@@ -1,0 +1,68 @@
+header:
+  schema-version: 2.2.0
+  last-updated: '2026-10-10'
+  last-reviewed: '2026-10-10'
+  url: https://raw.githubusercontent.com/agent-capability/agent-capability-contract/main/security-insights.yml
+  comment: >-
+    Security information for the ACC specification and repository-maintained
+    reference tooling.
+
+project:
+  name: Agent Capability Contract (ACC)
+  homepage: https://agentcapability.org
+  administrators:
+    - name: Jingchuan Nie
+      primary: true
+      social: https://github.com/niejingchuan
+  repositories:
+    - name: Agent Capability Contract
+      url: https://github.com/agent-capability/agent-capability-contract
+      comment: >-
+        Implementation-neutral capability specification, schemas, conformance
+        vectors and reference validation tooling. Runtime implementations are
+        independent projects and are outside this assessment scope.
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+    policy: https://github.com/agent-capability/agent-capability-contract/blob/main/SECURITY.md
+    in-scope:
+      - Normative ambiguity leading to materially different security decisions.
+      - Schema and reference-validator bypasses.
+      - Unsafe repository-maintained conformance or reference tooling.
+      - Integrity and supply-chain issues in artifacts published by this repository.
+    out-of-scope:
+      - Implementation-specific vulnerabilities without a portable ACC semantic defect.
+    comment: >-
+      SECURITY.md directs sensitive reports to the repository's GitHub private
+      vulnerability reporting channel and targets acknowledgement of complete
+      reports within three business days. The project does not currently operate
+      a paid bug bounty program.
+  documentation:
+    quickstart-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/QUICKSTART.md
+    detailed-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/README.md
+    design: https://github.com/agent-capability/agent-capability-contract/blob/main/CONCEPTS.md
+    support-policy: https://github.com/agent-capability/agent-capability-contract/blob/main/SECURITY.md
+
+repository:
+  url: https://github.com/agent-capability/agent-capability-contract
+  status: active
+  accepts-change-request: true
+  accepts-automated-change-request: true
+  core-team:
+    - name: Jingchuan Nie
+      primary: true
+      social: https://github.com/niejingchuan
+  license:
+    expression: Apache-2.0
+    url: https://github.com/agent-capability/agent-capability-contract/blob/main/LICENSE
+  documentation:
+    contributing-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/CONTRIBUTING.md
+    governance: https://github.com/agent-capability/agent-capability-contract/blob/main/GOVERNANCE.md
+    security-policy: https://github.com/agent-capability/agent-capability-contract/blob/main/SECURITY.md
+  security:
+    assessments:
+      self:
+        comment: >-
+          An OSPS self-assessment has not been completed. The ACC conformance
+          checks validate declared contract behavior; they are not an OSPS or
+          independent security assessment of this repository.
