@@ -25,18 +25,12 @@ project:
     reports-accepted: true
     bug-bounty-available: false
     policy: https://github.com/agent-capability/agent-capability-contract/blob/main/SECURITY.md
-    in-scope:
-      - Normative ambiguity leading to materially different security decisions.
-      - Schema and reference-validator bypasses.
-      - Unsafe repository-maintained conformance or reference tooling.
-      - Integrity and supply-chain issues in artifacts published by this repository.
-    out-of-scope:
-      - Implementation-specific vulnerabilities without a portable ACC semantic defect.
     comment: >-
       SECURITY.md directs sensitive reports to the repository's GitHub private
       vulnerability reporting channel and targets acknowledgement of complete
       reports within three business days. The project does not currently operate
-      a paid bug bounty program.
+      a paid bug bounty program. The ACC Security Scope section in that policy
+      describes covered reports and implementation-specific exclusions.
   documentation:
     quickstart-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/QUICKSTART.md
     detailed-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/README.md
