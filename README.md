@@ -88,6 +88,7 @@ ACC v1 declarations use `version: 1`. Exact specification revisions use reposito
 
 ## Implement ACC
 
+- Use [Conformance Status and Evidence](CONFORMANCE_STATUS.md) to distinguish released requirements, reference coverage, implementation claims, and untested surfaces.
 - Read the non-normative [Implementer's Guide](IMPLEMENTER_GUIDE.md).
 - Review [Safety Governance Responsibilities](SAFETY_GOVERNANCE_GUIDE.md) for trust boundaries, business examples, and the evidence each layer needs.
 - Choose a claim from [Conformance Profiles](conformance/PROFILES.md).
