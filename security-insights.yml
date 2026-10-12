@@ -1,7 +1,7 @@
 header:
   schema-version: 2.2.0
-  last-updated: '2026-10-10'
-  last-reviewed: '2026-10-10'
+  last-updated: '2026-10-12'
+  last-reviewed: '2026-10-12'
   url: https://raw.githubusercontent.com/agent-capability/agent-capability-contract/main/security-insights.yml
   comment: >-
     Security information for the ACC specification and repository-maintained
@@ -56,7 +56,32 @@ repository:
   security:
     assessments:
       self:
+        name: Repository security self-assessment
+        evidence: https://github.com/agent-capability/agent-capability-contract/blob/main/SECURITY_SELF_ASSESSMENT.md
         comment: >-
-          An OSPS self-assessment has not been completed. The ACC conformance
-          checks validate declared contract behavior; they are not an OSPS or
-          independent security assessment of this repository.
+          Maintainer assessment of the repository's scope, design, threats,
+          development practices and remaining gaps. This is not an independent
+          audit or a claim that all OSPS Baseline requirements pass.
+    tools:
+      - name: OSPS Baseline Scanner (Privateer)
+        type: other
+        version: '0.31.0'
+        rulesets:
+          - osps-baseline-2026-08
+        comment: >-
+          Fixed-digest Privateer GitHub repository scanner with read-only
+          permissions, weekly scheduling and workflow_dispatch. Initial manual
+          results are available; workflow success does not imply control success.
+        integration:
+          adhoc: true
+          ci: true
+          release: false
+        results:
+          adhoc:
+            name: Initial manual OSPS Baseline evaluation
+            predicate-uri: https://github.com/ossf/pvtr-github-repo-scanner
+            location: https://github.com/agent-capability/agent-capability-contract/actions/runs/38016769353
+          ci:
+            name: OSPS Baseline evaluation
+            predicate-uri: https://github.com/ossf/pvtr-github-repo-scanner
+            location: https://github.com/agent-capability/agent-capability-contract/actions/workflows/osps-baseline.yml
