@@ -85,6 +85,7 @@ ACC v1 声明固定使用 `version: 1`；规范仓通过 `v1.0.5` 这类 Tag 标
 
 ## 实现 ACC
 
+- 使用 [Conformance 状态与证据索引](CONFORMANCE_STATUS.zh-CN.md)，区分已发布要求、参考覆盖、实现声明与尚未验证的行为；
 - 阅读非规范性的 [实现者指南](IMPLEMENTER_GUIDE.md)；
 - 阅读[安全治理责任说明](SAFETY_GOVERNANCE_GUIDE.zh-CN.md)，结合业务示例明确可信边界和各层需要的证据；
 - 从 [合规 Profile](conformance/PROFILES.md) 中选择准确的实现声明；
