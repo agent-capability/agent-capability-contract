@@ -2,7 +2,7 @@
 
 状态：非规范性的证据索引
 
-复查日期：2026-10-12
+复查日期：2026-11-04
 
 [English](CONFORMANCE_STATUS.md)
 
@@ -12,13 +12,13 @@
 
 | 维度 | 证据与当前状态 | 限制 |
 |---|---|---|
-| 已发布契约基线 | [ACC v1.0.5](RELEASE_NOTES_v1.0.5.md)，Tag [`v1.0.5`](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.5)，Commit `2aae4e4adcc0fb06e70556a9700ed233e7c951cb` | 声明使用 `version: 1`；规范修订与实现版本分别记录。 |
-| 本次复查仓库材料 | 公开仓库快照 [`9f527009aa1068f448d377c38c03f8cbf76469f0`](https://github.com/agent-capability/agent-capability-contract/tree/9f527009aa1068f448d377c38c03f8cbf76469f0) | 后续文档和仓库检查本身不表示新的规范发布。 |
+| 已发布契约基线 | [ACC v1.0.6](RELEASE_NOTES_v1.0.6.md)，Tag [`v1.0.6`](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.6) | 声明使用 `version: 1`；规范修订与实现版本分别记录。 |
+| 本次复查仓库材料 | [`v1.0.6` 源码树](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.6)（保留此前已公开证据索引与安全资料） | 后续文档和仓库检查本身不表示新的规范发布。 |
 | 规范 | [ACC v1 稳定核心](SPEC.md) | 语义稳定不证明部署安全或生态已广泛采用。 |
 | 生态 | [早期采用](README.zh-CN.md) | 登记规模、证据深度与规范稳定性是不同维度。 |
 | Conformance 流程 | [Profiles](conformance/PROFILES.md)、[自评](conformance/SELF_ASSESSMENT.md)、参考向量 | 不声称存在官方认证计划。 |
 
-本次复查快照中的核心、Schema、Binding 与 26 条参考向量保留 v1.0.5 基线。覆盖索引和其他解释材料用于定位证据，不改变这些预期结果。
+v1.0.6 保留 v1.0.5 的核心语义、Schema、Binding 和原26条向量，新增22条风险优先级样例，并修正参照器在GET＋显式readonly:false＋省略risk时错误返回low的问题；既有Binding要求medium。先前的26条检查未覆盖该组合。
 
 ## 九个核心字段
 
@@ -29,7 +29,7 @@
 | `version` | [SPEC §4.1](SPEC.md#41-version)、Schema | 声明有效性与不支持版本的样例 | 全部解析错误路径或某个实现的版本协商 |
 | `enabled` | [SPEC §4.2](SPEC.md#42-enabled)、Schema | 声明与暴露样例 | 实际导入、暴露或调用分派闸门 |
 | `scope` | [SPEC §4.3](SPEC.md#43-scope)、Schema | 缺失 scope 与预先提供的 scope 策略样例 | 真实路由策略、租户隔离或最终权限 |
-| `risk` | [SPEC §4.4](SPEC.md#44-risk)、Schema；[OpenAPI 映射](bindings/openapi.md) | 两条默认风险样例 | 完整风险策略覆盖或部署中的实际执行 |
+| `risk` | [SPEC §4.4](SPEC.md#44-risk)、Schema；[OpenAPI 映射](bindings/openapi.md) | 24种方法／显式readonly／显式risk组合 | 完整风险策略覆盖或部署中的实际执行 |
 | `subject` | [SPEC §4.5](SPEC.md#45-subject)、Schema | 暴露样例使用预先提供的 `trusted_subject` 布尔值 | 身份认证、委托或跨信任边界的连续性 |
 | `approval` | [SPEC §4.6](SPEC.md#46-approval)、Schema 与 Binding 输入映射 | 十四条审批意图/条件样例 | 已完成审批、所有运算符边界、累计限制或第三方证据验证 |
 | `audit` | [SPEC §4.7](SPEC.md#47-audit)、Schema | 一条宽粒度敏感提示样例 | 实际脱敏持久化、访问权限、完整性或保留策略 |
@@ -53,7 +53,7 @@ Parser 与 Generator 声明需写明 Binding；Policy Component 声明需写明�
 
 ## 参考向量与仓库工具
 
-[ACC v1 corpus](conformance/v1/README.md) 有 **26 条向量**：声明 5、暴露 4、审批 14、默认风险 2、审计提示 1。它为 OpenAPI Binding Parser 和 Runtime Profile 提供抽象输入与结果，不穷尽这两类 Profile 或九个字段的全部行为。
+[ACC v1 corpus](conformance/v1/README.md) 有 **48 条向量**：声明 5、暴露 4、审批 14、默认风险 24、审计提示 1。它为 OpenAPI Binding Parser 和 Runtime Profile 提供抽象输入与结果，不穷尽这两类 Profile 或九个字段的全部行为。
 
 | 证据层 | 既有公开来源 | 含义与限制 |
 |---|---|---|

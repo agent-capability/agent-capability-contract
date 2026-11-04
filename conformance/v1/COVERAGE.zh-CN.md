@@ -2,11 +2,11 @@
 
 Status: Non-normative coverage index（非规范性覆盖索引）
 
-语料：`vectors.json`，格式版本 1，规范修订 1.0.5
+语料：`vectors.json`，格式版本 1，规范修订 1.0.6
 
 [English](COVERAGE.md)
 
-本索引说明已有 26 个参考向量，不改变预期结果或参考 oracle。规范义务及建议以 [SPEC.md](../../SPEC.md) 和 [OpenAPI Binding](../../bindings/openapi.md) 为准；先选定适用 [Profile](../PROFILES.md)。
+本索引说明 v1.0.6 的 48 个参考向量。原 26 条向量保持不变，新增 22 条风险优先级组合；参照器按既有 Binding 修正显式 readonly:false 被 GET 默认信号覆盖的问题。规范义务及建议以 [SPEC.md](../../SPEC.md) 和 [OpenAPI Binding](../../bindings/openapi.md) 为准；先选定适用 [Profile](../PROFILES.md)。
 
 ## 不同证据能证明什么
 
@@ -47,9 +47,31 @@ Status: Non-normative coverage index（非规范性覆盖索引）
 | `T-APPROVAL-14` | §4.6 | exists 不命中显式 null。 | `decision="allow"` | 决策接口及参数/派发绑定 | Not run |
 | `T-RISK-01` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | OpenAPI GET 在未声明风险与 readonly 时默认低风险。 | `effective_risk="low"` | Binding 映射及有效策略保留 | Not run |
 | `T-RISK-02` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | 非只读写操作省略风险时默认中风险。 | `effective_risk="medium"` | Binding 映射及有效策略保留 | Not run |
+| `T-RISK-03` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=false；risk.level=省略，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-04` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=false；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-05` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=false；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-06` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=false；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-07` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=省略；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-08` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=省略；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-09` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=省略；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-10` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=true；risk.level=省略，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-11` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=true；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-12` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=true；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-13` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | GET；execution.readonly=true；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-14` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=省略；risk.level=省略，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-15` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=省略；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-16` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=省略；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-17` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=省略；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-18` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=false；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-19` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=false；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-20` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=false；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-21` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=true；risk.level=省略，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-22` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=true；risk.level=low，按显式声明优先级推导。 | `effective_risk="low"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-23` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=true；risk.level=medium，按显式声明优先级推导。 | `effective_risk="medium"` | Binding 映射与有效策略保留 | Not run |
+| `T-RISK-24` | §4.4；[OpenAPI 输入映射](../../bindings/openapi.md#input-and-value-mapping) | POST；execution.readonly=true；risk.level=high，按显式声明优先级推导。 | `effective_risk="high"` | Binding 映射与有效策略保留 | Not run |
 | `T-AUDIT-01` | §4.7 | 保留 audit.sensitive 为 true 的提示。 | `audit_sensitive=true` | 提示传递；另外验证脱敏持久化 | Not run |
 
-向量统计：声明 5、暴露 4、审批 14、风险默认值 2、审计提示 1，共 **26** 项。
+向量统计：声明 5、暴露 4、审批 14、风险默认值 24、审计提示 1，共 **48** 项。
 
 ## 语料没有证明的部分
 

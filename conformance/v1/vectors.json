@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "acc_version": 1,
-  "specification_release": "1.0.5",
+  "specification_release": "1.0.6",
   "vectors": [
     {
       "id": "T-PARSE-01",
@@ -258,6 +258,182 @@
       "assertion": "A non-readonly write operation defaults to medium risk when risk is omitted.",
       "input": { "declaration": { "version": 1, "enabled": true, "scope": "order.update", "execution": { "readonly": false } }, "http_method": "POST" },
       "expected": { "effective_risk": "medium" }
+    },
+    {
+      "id": "T-RISK-03",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit execution.readonly false takes precedence over the OpenAPI GET method signal and defaults to medium risk.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}}, "http_method": "GET"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-04",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for GET with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "low"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-05",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for GET with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "medium"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-06",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for GET with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "high"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "high"}
+    },
+    {
+      "id": "T-RISK-07",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for GET with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "low"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-08",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for GET with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "medium"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-09",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for GET with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "high"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "high"}
+    },
+    {
+      "id": "T-RISK-10",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit execution.readonly true defaults to low risk for GET when risk.level is omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}}, "http_method": "GET"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-11",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for GET with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "low"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-12",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for GET with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "medium"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-13",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for GET with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "high"}}, "http_method": "GET"},
+      "expected": {"effective_risk": "high"}
+    },
+    {
+      "id": "T-RISK-14",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "A non-GET operation defaults to medium risk when risk.level and execution.readonly are omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect"}, "http_method": "POST"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-15",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for POST with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "low"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-16",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for POST with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "medium"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-17",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for POST with execution.readonly omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "risk": {"level": "high"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "high"}
+    },
+    {
+      "id": "T-RISK-18",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for POST with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "low"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-19",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for POST with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "medium"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-20",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for POST with execution.readonly false.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": false}, "risk": {"level": "high"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "high"}
+    },
+    {
+      "id": "T-RISK-21",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit execution.readonly true defaults to low risk for POST when risk.level is omitted.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}}, "http_method": "POST"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-22",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level low takes precedence for POST with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "low"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "low"}
+    },
+    {
+      "id": "T-RISK-23",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level medium takes precedence for POST with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "medium"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "medium"}
+    },
+    {
+      "id": "T-RISK-24",
+      "profile": "runtime",
+      "kind": "risk-default",
+      "assertion": "Explicit risk.level high takes precedence for POST with execution.readonly true.",
+      "input": {"declaration": {"version": 1, "enabled": true, "scope": "order.inspect", "execution": {"readonly": true}, "risk": {"level": "high"}}, "http_method": "POST"},
+      "expected": {"effective_risk": "high"}
     },
     {
       "id": "T-AUDIT-01",
