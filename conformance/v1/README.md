@@ -29,6 +29,24 @@ The vectors complement the human checklist in [../README.md](../README.md). They
 
 ## Using The Corpus
 
+The current working tree contains 48 vectors, including 24 `risk-default`
+cases: GET/POST × omitted/false/true `execution.readonly` ×
+omitted/low/medium/high `risk.level`. Explicit risk takes precedence; explicit
+readonly takes precedence over the binding-native GET fallback. These cases
+check the existing [OpenAPI binding](../../bindings/openapi.md), not new rules.
+
+The released v1.0.5 corpus contained 26 vectors. Its reference oracle incorrectly
+returned `low` for GET with explicit `execution.readonly: false` and omitted
+`risk.level`; the binding requires `medium`. Passing those 26 vectors did not
+exercise this case. The correction is currently recorded under
+[Unreleased](../../CHANGELOG.md#unreleased).
+
+Because a corpus may receive corrections without changing the declaration
+family or normative semantics, identify the exact corpus commit or content
+digest as well as its specification release when reporting results. The
+`specification_release` field identifies the normative baseline, not a unique
+test-content fingerprint.
+
 An implementation may write an adapter that:
 
 1. reads each vector applicable to its claimed Profile;

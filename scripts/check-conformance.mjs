@@ -146,8 +146,9 @@ function observe(vector) {
 
   if (vector.kind === 'risk-default') {
     const explicit = declaration.risk?.level;
-    const readonly = declaration.execution?.readonly === true;
-    const effectiveRisk = explicit || (String(vector.input.http_method).toUpperCase() === 'GET' || readonly ? 'low' : 'medium');
+    const readonly = declaration.execution?.readonly
+      ?? (String(vector.input.http_method).toUpperCase() === 'GET');
+    const effectiveRisk = explicit || (readonly ? 'low' : 'medium');
     return { effective_risk: effectiveRisk };
   }
 
