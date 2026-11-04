@@ -2,7 +2,7 @@
 
 Status: Non-normative evidence index
 
-Reviewed: 2026-10-12
+Reviewed: 2026-11-04
 
 [简体中文](CONFORMANCE_STATUS.zh-CN.md)
 
@@ -12,13 +12,13 @@ This index brings together existing ACC requirements, reference coverage, implem
 
 | Dimension | Evidence and current state | Limit |
 |---|---|---|
-| Released contract baseline | [ACC v1.0.5](RELEASE_NOTES_v1.0.5.md), tag [`v1.0.5`](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.5), commit `2aae4e4adcc0fb06e70556a9700ed233e7c951cb` | Declarations use `version: 1`; specification revisions and implementation versions are separate. |
-| Repository material reviewed | Public repository snapshot [`9f527009aa1068f448d377c38c03f8cbf76469f0`](https://github.com/agent-capability/agent-capability-contract/tree/9f527009aa1068f448d377c38c03f8cbf76469f0) | Later documentation and repository checks do not themselves announce a new specification release. |
+| Released contract baseline | [ACC v1.0.6](RELEASE_NOTES_v1.0.6.md), tag [`v1.0.6`](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.6) | Declarations use `version: 1`; specification revisions and implementation versions are separate. |
+| Repository material reviewed | [`v1.0.6` source tree](https://github.com/agent-capability/agent-capability-contract/tree/v1.0.6), retaining the previously published evidence index and security documentation | Later documentation and repository checks do not themselves announce a new specification release. |
 | Specification | [Stable ACC v1 core](SPEC.md) | Stable semantics do not establish deployment safety or broad ecosystem adoption. |
 | Ecosystem | [Early adoption](README.md) | Registry size and evidence depth are separate from specification stability. |
 | Conformance process | [Profiles](conformance/PROFILES.md), [self-assessment](conformance/SELF_ASSESSMENT.md), reference vectors | No official certification program is claimed. |
 
-The core, schema, binding, and 26-vector corpus in the reviewed snapshot retain the v1.0.5 baseline. The coverage index and other explanatory material help navigate evidence without changing those outcomes.
+v1.0.6 retains the v1.0.5 core semantics, schema, binding, and original 26 vectors. It adds 22 risk-precedence cases and corrects the reference oracle for GET with explicit readonly:false and omitted risk: the binding requires medium, while the old oracle returned low. The original 26 checks did not cover that combination.
 
 ## Nine Core Fields
 
@@ -29,7 +29,7 @@ The [JSON Schema](schemas/acc.v1.schema.json) defines all nine top-level fields.
 | `version` | [SPEC §4.1](SPEC.md#41-version), schema | Declaration validity and unsupported-version samples | Every parser error path or an implementation's version negotiation |
 | `enabled` | [SPEC §4.2](SPEC.md#42-enabled), schema | Declaration and exposure samples | Actual ingestion, exposure, or dispatch gating |
 | `scope` | [SPEC §4.3](SPEC.md#43-scope), schema | Missing-scope and supplied scope-policy samples | Real route policy, tenant isolation, or final permission |
-| `risk` | [SPEC §4.4](SPEC.md#44-risk), schema; [OpenAPI mapping](bindings/openapi.md) | Two default-risk cases | Complete risk-policy coverage or deployment-specific enforcement |
+| `risk` | [SPEC §4.4](SPEC.md#44-risk), schema; [OpenAPI mapping](bindings/openapi.md) | 24 method / explicit-readonly / explicit-risk combinations | Complete risk-policy coverage or deployment-specific enforcement |
 | `subject` | [SPEC §4.5](SPEC.md#45-subject), schema | Exposure uses supplied `trusted_subject` booleans | Authentication, delegation, or continuity across trust boundaries |
 | `approval` | [SPEC §4.6](SPEC.md#46-approval), schema and binding input mapping | Fourteen intent/condition cases | Completed approval, all operator boundaries, aggregate limits, or third-party evidence verification |
 | `audit` | [SPEC §4.7](SPEC.md#47-audit), schema | One broad sensitivity-hint case | Actual redacted persistence, access, completeness, or retention |
@@ -53,7 +53,7 @@ Parser and generator claims name their binding. A policy-component claim names i
 
 ## Reference Corpus and Repository Tooling
 
-The [ACC v1 corpus](conformance/v1/README.md) contains **26 vectors**: declaration 5, exposure 4, approval 14, risk defaults 2, audit hint 1. It supplies abstract inputs and outcomes for the OpenAPI Binding Parser and Runtime profiles; it is not exhaustive coverage of either profile or of the nine fields.
+The [ACC v1 corpus](conformance/v1/README.md) contains **48 vectors**: declaration 5, exposure 4, approval 14, risk defaults 24, audit hint 1. It supplies abstract inputs and outcomes for the OpenAPI Binding Parser and Runtime profiles; it is not exhaustive coverage of either profile or of the nine fields.
 
 | Evidence layer | Existing public source | Meaning and limit |
 |---|---|---|

@@ -2,7 +2,7 @@
 
 Status: Reference conformance corpus
 
-Specification release: 1.0.5
+Specification release: 1.0.6
 
 Declaration compatibility family: ACC v1
 
@@ -15,7 +15,7 @@ The vectors complement the human checklist in [../README.md](../README.md). They
 - `vectors.schema.json`: schema for the corpus format.
 - `vectors.json`: versioned parser and runtime cases.
 - `../../scripts/check-conformance.mjs`: reference oracle used to verify that the corpus is internally consistent.
-- [Coverage and implementation evidence](COVERAGE.md) ([中文](COVERAGE.zh-CN.md)): all 26 vector IDs, their limits, and the integration evidence they do not replace.
+- [Coverage and implementation evidence](COVERAGE.md) ([中文](COVERAGE.zh-CN.md)): all 48 vector IDs, their limits, and the integration evidence they do not replace.
 
 ## Abstract Kinds
 
@@ -29,7 +29,7 @@ The vectors complement the human checklist in [../README.md](../README.md). They
 
 ## Using The Corpus
 
-The current working tree contains 48 vectors, including 24 `risk-default`
+The v1.0.6 corpus contains 48 vectors, including 24 `risk-default`
 cases: GET/POST × omitted/false/true `execution.readonly` ×
 omitted/low/medium/high `risk.level`. Explicit risk takes precedence; explicit
 readonly takes precedence over the binding-native GET fallback. These cases
@@ -38,8 +38,8 @@ check the existing [OpenAPI binding](../../bindings/openapi.md), not new rules.
 The released v1.0.5 corpus contained 26 vectors. Its reference oracle incorrectly
 returned `low` for GET with explicit `execution.readonly: false` and omitted
 `risk.level`; the binding requires `medium`. Passing those 26 vectors did not
-exercise this case. The correction is currently recorded under
-[Unreleased](../../CHANGELOG.md#unreleased).
+exercise this case. The correction is included in
+[v1.0.6](../../RELEASE_NOTES_v1.0.6.md).
 
 Because a corpus may receive corrections without changing the declaration
 family or normative semantics, identify the exact corpus commit or content

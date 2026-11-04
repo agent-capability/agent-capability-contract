@@ -56,7 +56,7 @@ ACC 管 reach：Agent 最多能触达哪些能力。
 无需全局安装即可运行已发布的校验器：
 
 ```bash
-npx --yes agent-capability-contract@1.0.5 validate ./openapi.yaml
+npx --yes agent-capability-contract@1.0.6 validate ./openapi.yaml
 ```
 
 校验器是非规范性的作者辅助工具。它不替代 ACC 规范、完整 OpenAPI
@@ -118,7 +118,8 @@ DESIGN_RATIONALE.md           ACC 保持小核心的原因与相邻职责边界
 DESIGN_RATIONALE.zh-CN.md     设计依据与边界中文版
 LANDSCAPE.md                  相邻协议与治理层的非规范性分层说明
 IMPLEMENTATIONS.md            已知实现与声明口径
-RELEASE_NOTES_v1.0.5.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.6.md       当前 ACC v1 补丁发布摘要
+RELEASE_NOTES_v1.0.5.md       上一版 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.4.md       上一个 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.3.md       更早的 ACC v1 补丁发布摘要
 RELEASE_NOTES_v1.0.2.md       更早的 ACC v1 补丁发布摘要

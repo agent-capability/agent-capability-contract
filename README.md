@@ -58,7 +58,7 @@ the `acc-validate` authoring tool, and then expand to the included
 Run the published validator without installing it globally:
 
 ```bash
-npx --yes agent-capability-contract@1.0.5 validate ./openapi.yaml
+npx --yes agent-capability-contract@1.0.6 validate ./openapi.yaml
 ```
 
 The validator is a non-normative authoring aid. It does not replace the ACC
@@ -121,8 +121,9 @@ DESIGN_RATIONALE.md           Why ACC stays small and where adjacent concerns be
 DESIGN_RATIONALE.zh-CN.md     Chinese design rationale and boundaries
 LANDSCAPE.md                  Non-normative map of adjacent protocols and governance layers
 IMPLEMENTATIONS.md            Known implementations and claim language
-RELEASE_NOTES_v1.0.5.md       Current ACC v1 patch release summary
-RELEASE_NOTES_v1.0.4.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.6.md       Current ACC v1 patch release summary
+RELEASE_NOTES_v1.0.5.md       Previous ACC v1 patch release summary
+RELEASE_NOTES_v1.0.4.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.3.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.2.md       Earlier ACC v1 patch release summary
 RELEASE_NOTES_v1.0.1.md       Earlier ACC v1 patch release summary

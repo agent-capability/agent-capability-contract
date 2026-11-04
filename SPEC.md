@@ -4,7 +4,7 @@ Status: Stable
 Ecosystem maturity: Early adoption
 Conformance: Self-assessment with machine-readable reference vectors
 Short name: ACC v1
-Specification release: 1.0.5
+Specification release: 1.0.6
 First standardized binding: OpenAPI (`x-agent-capability`)
 
 ## 1. Scope

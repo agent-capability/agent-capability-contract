@@ -2,11 +2,11 @@
 
 Status: Non-normative coverage index
 
-Corpus: `vectors.json`, format version 1, specification release 1.0.5
+Corpus: `vectors.json`, format version 1, specification release 1.0.6
 
 [中文](COVERAGE.zh-CN.md)
 
-This index describes the existing 26 reference vectors without changing their expected outcomes or the reference oracle. Normative obligations and recommendations remain in [SPEC.md](../../SPEC.md) and the [OpenAPI binding](../../bindings/openapi.md). Choose the applicable [Profile](../PROFILES.md) first.
+This index describes the 48 reference vectors in v1.0.6. The original 26 vectors retain their outcomes; 22 risk-precedence cases are added, and the oracle now respects the existing binding rule for explicit readonly:false on GET. Normative obligations and recommendations remain in [SPEC.md](../../SPEC.md) and the [OpenAPI binding](../../bindings/openapi.md). Choose the applicable [Profile](../PROFILES.md) first.
 
 ## What Each Layer Proves
 
@@ -47,9 +47,31 @@ Every row has an abstract vector. The last two columns concern a real implementa
 | `T-APPROVAL-14` | §4.6 | The exists operator does not match an explicit JSON null value. | `decision="allow"` | Decision interface plus argument/dispatch binding | Not run |
 | `T-RISK-01` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Under the OpenAPI binding, a GET operation defaults to low risk when risk and execution.readonly are omitted. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
 | `T-RISK-02` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | A non-readonly write operation defaults to medium risk when risk is omitted. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-03` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit execution.readonly false takes precedence over the OpenAPI GET method signal and defaults to medium risk. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-04` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for GET with execution.readonly false. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-05` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for GET with execution.readonly false. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-06` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for GET with execution.readonly false. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-07` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for GET with execution.readonly omitted. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-08` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for GET with execution.readonly omitted. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-09` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for GET with execution.readonly omitted. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-10` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit execution.readonly true defaults to low risk for GET when risk.level is omitted. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-11` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for GET with execution.readonly true. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-12` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for GET with execution.readonly true. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-13` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for GET with execution.readonly true. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-14` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | A non-GET operation defaults to medium risk when risk.level and execution.readonly are omitted. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-15` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for POST with execution.readonly omitted. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-16` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for POST with execution.readonly omitted. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-17` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for POST with execution.readonly omitted. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-18` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for POST with execution.readonly false. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-19` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for POST with execution.readonly false. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-20` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for POST with execution.readonly false. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-21` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit execution.readonly true defaults to low risk for POST when risk.level is omitted. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-22` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level low takes precedence for POST with execution.readonly true. | `effective_risk="low"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-23` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level medium takes precedence for POST with execution.readonly true. | `effective_risk="medium"` | Binding mapping and effective policy preservation | Not run |
+| `T-RISK-24` | §4.4; [OpenAPI input mapping](../../bindings/openapi.md#input-and-value-mapping) | Explicit risk.level high takes precedence for POST with execution.readonly true. | `effective_risk="high"` | Binding mapping and effective policy preservation | Not run |
 | `T-AUDIT-01` | §4.7 | The broad audit sensitivity hint is preserved as true. | `audit_sensitive=true` | Hint propagation; separate redacted-persistence test | Not run |
 
-Inventory: declaration 5; exposure 4; approval 14; risk defaults 2; audit hint 1. Total: **26**.
+Inventory: declaration 5; exposure 4; approval 14; risk defaults 24; audit hint 1. Total: **48**.
 
 ## Where the Corpus Stops
 

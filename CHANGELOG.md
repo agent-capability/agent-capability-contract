@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.0.6 - 2026-11-04
+
+[Detailed release notes](RELEASE_NOTES_v1.0.6.md)
+
 - Corrected the reference conformance oracle so an explicit
   `execution.readonly: false` takes precedence over the OpenAPI `GET` fallback
   when `risk.level` is omitted. The effective risk is `medium`, as already
@@ -12,6 +16,9 @@
 - No normative rule, declaration schema, corpus format, or authoring CLI
   behavior changed. This correction does not establish a production-runtime
   vulnerability or confer certification on implementations passing the corpus.
+- Updated the repository lockfile's transitive `fast-uri` dependency from
+  3.1.8 to 3.1.9 to satisfy the existing dependency-audit gate. Direct dependency
+  ranges and the authoring CLI source remain unchanged.
 
 ## 1.0.5 - 2026-08-04
 
