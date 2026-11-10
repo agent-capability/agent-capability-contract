@@ -53,3 +53,23 @@ After a report is triaged, maintainers will coordinate a correction and public
 disclosure when one is required. Normative changes still follow ACC governance
 and compatibility rules. Reporter credit is preserved unless anonymity is
 requested.
+
+## Project stewardship and security coordination
+
+Agent Capability Contract (ACC) is independently maintained. It is not hosted by a foundation
+and has no designated external open-source steward or external CRA stewardship
+arrangement. The repository maintainer identified in [GOVERNANCE.md](GOVERNANCE.md)
+is responsible for security triage and coordination through the private
+vulnerability reporting channel above.
+
+The project permits commercial use. This statement does not assert that all
+possible downstream uses are outside the EU Cyber Resilience Act (CRA), and does
+not claim legal compliance, certification, or participation in another
+organization's stewardship framework. Downstream products and deployments must
+assess their own roles and obligations.
+
+For reliable evidence of active exploitation or a compromise of project
+infrastructure, use the same private reporting channel and identify the incident
+and urgency. Maintainers should follow the coordination steps in
+[CONTRIBUTING.md](CONTRIBUTING.md). The project has no separately staffed emergency
+hotline or guaranteed incident-response time.
