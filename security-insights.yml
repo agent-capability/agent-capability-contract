@@ -1,6 +1,6 @@
 header:
   schema-version: 2.2.0
-  last-updated: '2026-10-12'
+  last-updated: '2026-11-11'
   last-reviewed: '2026-10-12'
   url: https://raw.githubusercontent.com/agent-capability/agent-capability-contract/main/security-insights.yml
   comment: >-
@@ -31,6 +31,10 @@ project:
       reports within three business days. The project does not currently operate
       a paid bug bounty program. The ACC Security Scope section in that policy
       describes covered reports and implementation-specific exclusions.
+      The project is independently maintained with no designated external
+      open-source steward. SECURITY.md describes project stewardship and
+      CONTRIBUTING.md documents security incident coordination. This is not a
+      claim of CRA legal compliance or certification.
   documentation:
     quickstart-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/QUICKSTART.md
     detailed-guide: https://github.com/agent-capability/agent-capability-contract/blob/main/README.md
